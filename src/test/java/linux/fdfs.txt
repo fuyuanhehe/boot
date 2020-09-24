@@ -1,0 +1,20 @@
+
+/usr/bin/fdfs_upload_file  /etc/fdfs/client.conf  /datas/1.png
+
+http://192.168.93.129:9999/group1/M00/00/00/wKhdgVuPlGSALPvnAAASU6dtKH4616.png
+
+ location ~/group([0-9])/M00 {
+        ngx_fastdfs_module;
+      }
+
+./configure --prefix=/usr/local/nginx --add-module=/usr/local/fastdfs-nginx-module-master/src --with-http_image_filter_module --with-http_realip_module  --with-debug
+
+
+
+Í£Ö¹
+killall fdfs_trackerd 
+killall fdfs_storaged 
+ps -ef|grep fdfs
+Æô¶¯
+ /etc/init.d/fdfs_trackerd start
+ /etc/init.d/fdfs_storaged start

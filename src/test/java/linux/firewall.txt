@@ -1,0 +1,52 @@
+其中--permanent的作用是使设置永久生效，不加的话机器重启之后失效
+firewall-cmd --permanent --add-port=6666/tcp
+
+firewall-cmd --zone=public --add-port=22/tcp --permanent
+可通过如下命令查看是否生效
+firewall-cmd --zone=public --query-port=22/tcp
+
+
+systemctl start  firewalld # 启动
+systemctl status firewalld # 或者 firewall-cmd --state 查看状态
+systemctl disable firewalld # 停止
+systemctl stop firewalld  # 禁用
+
+firewall-cmd --reload # 更新防火墙规则
+
+取消锁定
+systemctl unmask firewalld
+
+添加临时新端口
+firewall-cmd --add-port=443/tcp
+
+# 查看防火墙，添加的端口也可以看到
+firewall-cmd --list-all
+
+
+如下命令可查看当前系统打开的所有端口
+firewall-cmd --zone=public --list-ports
+
+比如我们现在需要关掉刚刚打开的22端口
+firewall-cmd --zone=public --remove-port=22/tcp --permanent
+
+
+批量开放端口，如从100到500这之间的端口我们全部要打开
+firewall-cmd --zone=public --add-port=100-500/tcp --permanent
+firewall-cmd --reload
+
+同理，批量限制端口为
+firewall-cmd --zone=public --remove-port=100-500/tcp --permanent
+firewall-cmd --reload
+
+比如限制IP为192.168.0.200的地址禁止访问80端口即禁止访问机器
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.0.200" port protocol="tcp" port="80" reject"
+
+查看已经设置的规则
+firewall-cmd --zone=public --list-rich-rules
+
+解除刚才被限制的192.168.0.200
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.0.200" port protocol="tcp" port="80" accept"
+
+
+如设置未生效，可尝试直接编辑规则文件，删掉原来的设置规则，重新载入一下防火墙即可
+vi /etc/firewalld/zones/public.xml

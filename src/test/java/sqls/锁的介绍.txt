@@ -1,0 +1,48 @@
+一、乐观锁
+?总是认为不会产生并发问题，每次去取数据的时候总认为不会有其他线程对数据进行修改，因此不会上锁，但是在更新时会判断其他线程在这之前有没有对数据进行修改，一般会使用版本号机制或CAS操作实现。
+
+?version方式：一般是在数据表中加上一个数据版本号version字段，表示数据被修改的次数，当数据被修改时，version值会加一。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值为当前数据库中的version值相等时才更新，否则重试更新操作，直到更新成功。
+
+
+
+核心SQL代码：
+
+update table set x=x+1, version=version+1 where id=#{id} and version=#{version};  
+
+ CAS操作方式：即compare and swap 或者 compare and set，涉及到三个操作数，数据所在的内存值，预期值，新值。当需要更新时，判断当前内存值与之前取到的值是否相等，若相等，则用新值更新，若失败则重试，一般情况下是一个自旋操作，即不断的重试。
+
+一、悲观锁
+ 总是假设最坏的情况，每次取数据时都认为其他线程会修改，所以都会加锁（读锁、写锁、行锁等），当其他线程想要访问数据时，都需要阻塞挂起。可以依靠数据库实现，如行锁、读锁和写锁等，都是在操作之前加锁，在Java中，synchronized的思想也是悲观锁。
+
+
+ 二、悲观锁
+悲观锁，简单地说，就是从数据库层面上做并发控制，去加锁。
+悲观锁的实现方式有两种：共享锁（读锁）和排它锁（写锁）	
+
+共享锁（IS锁），实现方式是在sql后加LOCK IN SHARE MODE，比如SELECT ... LOCK IN SHARE MODE，即在符合条件的rows上都加了共享锁，这样的话，其他session可以读取这些记录，也可以继续添加IS锁，但是无法修改这些记录直到你这个加锁的session执行完成(否则直接锁等待超时)。
+
+
+排它锁（IX锁），实现方式是在sql后加FOR UPDATE，比如SELECT ... FOR UPDATE ，即在符合条件的rows上都加了排它锁，其他session也就无法在这些记录上添加任何的S锁或X锁。如果不存在一致性非锁定读的话，那么其他session是无法读取和修改这些记录的，但是innodb有非锁定读(快照读并不需要加锁)，for update之后并不会阻塞其他session的快照读取操作，除了select ...lock in share mode和select ... for update这种显示加锁的查询操作。
+
+通过对比，发现for update的加锁方式无非是比lock in share mode的方式多阻塞了select...lock in share mode的查询方式，并不会阻塞快照读。
+
+
+  BEGIN;
+
+-- SELECT * FROM `user` WHERE id = 1 LOCK in SHARE MODE;
+
+ SELECT * FROM `user` WHERE id = 1 for UPDATE;
+-- COMMIT;
+
+
+都不影响读  SELECT * FROM `user` WHERE id = 1  但是影响加锁读
+
+
+
+
+
+
+
+
+
+

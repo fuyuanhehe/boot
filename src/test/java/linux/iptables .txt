@@ -1,0 +1,59 @@
+iptables 的安装与配置
+
+ 
+由于centos7默认是使用firewall作为防火墙，下面介绍如何将系统的防火墙设置为iptables。
+
+#停止firewall 
+systemctl stop firewall.service
+
+#禁止firewall开机启动 
+systemctl disable firewall.service
+
+ 
+
+#安装iptables 
+yum install iptables-services
+
+  
+
+#编辑防火墙文件 （建议都在配置文件配置，不要命令配置）
+vi /etc/sysconfig/iptables 
+#添加80和3306端口 等等（自己配置）
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT        　　 #80端口开放
+
+-A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT　　　 #3306端口开放
+
+-I INPUT -s 113.106.93.110 -p tcp --dport 8089 -j DROP                      　　　#禁止指定IP访问 8089
+
+-I INPUT -s 113.106.93.110 -p tcp --dport 8080 -j ACCEPT                 　　　#开放固定ipIP访问 8080
+
+ 
+
+#重启防火墙使配置文件生效  
+systemctl restart iptables.service
+
+#设置iptables防火墙为开机启动项 
+systemctl enable iptables.service
+
+ 
+
+service iptables  start          #启动服务
+
+service iptables  stop　　   #停止服务
+
+service iptables  restart　　#重启服务
+
+ 
+关闭SELINUX 
+vi /etc/selinux/config 
+　#注释以下配置 
+　SELINUX=enforcing 
+　SELINUXTYPE=targeted 
+　 
+　#增加以下配置 
+　SELINUX=disabled 
+　 
+　#使配置立即生效 
+　setenforce 0
+
+ 

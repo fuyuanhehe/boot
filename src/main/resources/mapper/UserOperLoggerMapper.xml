@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.boot.mapper.UserOperLoggerMapper">
+    <!-- 所有的字段 -->
+    <sql id="fieldAll">id, content, operType, operBy, operTime, ipAddr, remark, operParam,isDeleted</sql>
+
+    <sql id="setFieldAll">#{logger.id}, #{logger.content}, #{logger.operType}, #{logger.operBy}, #{logger.operTime}, #{logger.ipAddr}, #{logger.remark},#{logger.operParam},#{logger.isDeleted}</sql>
+
+    <!-- 保存操作日志 -->
+    <insert id="addUserOperLogger">
+        INSERT INTO user_oper_log_${curDate}(<include refid="fieldAll"/>)
+        VALUES (<include refid="setFieldAll"/>)
+    </insert>
+
+    <!-- 删除日志 -->
+    <update id="delUserOperLogger" parameterType="java.lang.String">
+        update user_oper_log_${curDate} set isDeleted = 1 where id = #{id}
+    </update>
+    
+    <!-- 增加日志表 -->
+    <update id="addUserOperLoggerTb" parameterType="java.lang.String">
+        create table user_oper_log_${nextDate} as select * from user_oper_log
+    </update>
+    
+    <!-- 查询单条日志 -->    
+    <select id="findSingleUserOperLog" parameterType="java.lang.String" resultType="com.boot.boot.logger.UserOperLogger">
+        SELECT <include refid="fieldAll"/> FROM user_oper_log_${curDate} WHERE isDeleted = 0 and id = #{id}
+    </select>
+
+    <!-- 说明：查找所有的logs -->
+    <select id="findAllUserOperLogger" resultType="com.boot.boot.logger.UserOperLogger">
+        SELECT <include refid="fieldAll"/> FROM user_oper_log_${curDate}
+        <where>
+            <if test="params.content != null and params.content != ''">content like CONCAT(CONCAT('%',#{params.content},'%')) </if>
+            <if test="params.operBy != null and params.operBy != ''">AND operBy  like CONCAT(CONCAT('%',#{params.operBy},'%'))</if>
+            <if test="params.operType != null and params.operType != ''">AND operType = #{params.operType} </if>
+            <if test="params.ipAddr != null and params.ipAddr != ''">AND ipAddr = #{params.ipAddr} </if>
+            <if test="params.startTime != null and params.startTime != ''">AND operTime &gt; #{params.operTime} </if>
+            <if test="params.endTime != null and params.endTime != ''">AND operTime &lt; #{params.operTime} </if>
+        </where>
+        ORDER BY operTime ASC
+        <if test="params.startRecod != null">
+            limit #{params.startRecord}, #{params.pageSize}
+        </if>
+    </select>
+
+    <!-- 说明：查找所有的logs count -->
+    <select id="findAllUserOperLoggerCount" resultType="java.lang.Long">
+        SELECT COUNT(id) FROM user_oper_log_${curDate}
+        <where>
+            <if test="params.content != null and params.content != ''">content like CONCAT(CONCAT('%',#{params.content},'%')) </if>
+            <if test="params.operBy != null and params.operBy != ''">AND operBy  like CONCAT(CONCAT('%',#{params.operBy},'%'))</if>
+            <if test="params.operType != null and params.operType != ''">AND operType = #{params.operType} </if>
+            <if test="params.ipAddr != null and params.ipAddr != ''">AND ipAddr = #{params.ipAddr} </if>
+            <if test="params.startTime != null and params.startTime != ''">AND operTime &gt; #{params.operTime} </if>
+            <if test="params.endTime != null and params.endTime != ''">AND operTime &lt; #{params.operTime} </if>
+        </where>
+    </select>
+
+</mapper>

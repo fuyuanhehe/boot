@@ -1,0 +1,80 @@
+SELECT
+	r.id,
+	r.role,
+	GROUP_CONCAT( p.permission )
+FROM
+	role r
+	LEFT JOIN permission p ON r.role = p.role
+GROUP BY
+	r.id
+
+SELECT
+	s.*
+FROM
+	sys_role_map_menu s
+WHERE
+	NOT EXISTS ( SELECT m.id FROM sys_menu m WHERE m.id = s.menu_id )
+
+```````````
+	SELECT
+	s.*
+FROM
+	sys_role_map_menu s  WHERE menu_id not in (  SELECT m.id FROM sys_menu m )
+
+	SELECT * FROM sys_role_map_menu s LEFT join sys_menu m on s.menu_id = m.id
+
+`````````
+     SELECT
+             bb.count,
+             bc.NAME
+         FROM
+             ( SELECT
+                   count( category_id ),
+                   category_id
+               FROM base_document b
+               GROUP BY category_id )
+                 bb
+                 JOIN base_document_category bc ON bb.category_id = bc.id
+
+`````````````
+        SELECT
+              bc.NAME,
+              sum( b.download_num ) AS sum
+          FROM
+              base_document_category bc
+              LEFT JOIN base_document b ON bc.id = b.category_id
+          GROUP BY
+              bc.NAME
+          ORDER BY
+             sum DESC
+
+   pgsql
+   current_date: 是pgsql内置的一个获取当前日期的字段
+   current_timestamp： 是pgsql内置的一个获取当前时间的字段
+
+    查询当天的数据
+   SELECT
+   	*
+   FROM
+   	base_document AS n
+   WHERE
+   	n.create_time >= CURRENT_DATE;
+
+
+查询 今天到上个月的数据
+SELECT
+	*
+FROM
+	base_document
+WHERE
+	update_time BETWEEN ( SELECT CURRENT_TIMESTAMP - INTERVAL '1 month' )
+	AND ( SELECT CURRENT_TIMESTAMP )
+
+
+转化成字符串
+	to_char(b.update_time, 'YYYY-MM-dd')
+
+
+
+
+

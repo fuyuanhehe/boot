@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1586936518175" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1586936518175" name="" targetNamespace="http://www.activiti.org/testm1586936518175" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="test2" isClosed="false" isExecutable="true" processType="None">
+    <startEvent id="_1111" name="StartEvent"/>
+    <userTask activiti:candidateGroups="哈哈哈" activiti:exclusive="true" id="_222" name="UserTask22">
+      <extensionElements>
+        <activiti:executionListener event="start"/>
+        <activiti:taskListener event="create"/>
+      </extensionElements>
+    </userTask>
+    <userTask activiti:candidateGroups="哈哈2" activiti:exclusive="true" id="_3333" name="UserTask333"/>
+    <endEvent id="__over" name="EndEvent"/>
+    <sequenceFlow id="_6" sourceRef="_3333" targetRef="__over"/>
+    <sequenceFlow id="_7" sourceRef="_222" targetRef="_3333"/>
+    <sequenceFlow id="_8" sourceRef="_1111" targetRef="_222"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="test2">
+      <bpmndi:BPMNShape bpmnElement="_1111" id="Shape-_1111">
+        <dc:Bounds height="32.0" width="32.0" x="185.0" y="55.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_222" id="Shape-_222">
+        <dc:Bounds height="55.0" width="85.0" x="160.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3333" id="Shape-_3333">
+        <dc:Bounds height="55.0" width="85.0" x="200.0" y="315.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="__over" id="Shape-__over">
+        <dc:Bounds height="32.0" width="32.0" x="230.0" y="470.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="_3333" targetElement="__over">
+        <di:waypoint x="246.0" y="370.0"/>
+        <di:waypoint x="246.0" y="470.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="_222" targetElement="_3333">
+        <di:waypoint x="222.5" y="235.0"/>
+        <di:waypoint x="222.5" y="315.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="_1111" targetElement="_222">
+        <di:waypoint x="201.0" y="87.0"/>
+        <di:waypoint x="201.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

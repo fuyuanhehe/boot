@@ -1,0 +1,130 @@
+ root     http://10.181.83.78
+fuyuan199852        java -version                       
+
+/usr/bin/fdfs_upload_file  /etc/fdfs/client.conf  /datas/1.png
+
+http://192.168.93.129:9999/group1/M00/00/00/wKhdgVuPlGSALPvnAAASU6dtKH4616.png
+
+ location ~/group([0-9])/M00 {
+        ngx_fastdfs_module;
+      }
+
+./configure --prefix=/usr/local/nginx --add-module=/usr/local/fastdfs-nginx-module-master/src --with-http_image_filter_module --with-http_realip_module  --with-debug
+
+
+linx 账号  
+  fuyuan  
+  fy199852..
+
+firewall-cmd --permanent --add-port=6666/tcp
+停止
+killall fdfs_trackerd 
+killall fdfs_storaged 
+ps -ef|grep fdfs
+启动
+ /etc/init.d/fdfs_trackerd start
+ /etc/init.d/fdfs_storaged start
+
+/usr/local/nginx/sbin/nginx 
+
+systemctl start  firewalld # 启动
+systemctl status firewalld # 或者 firewall-cmd --state 查看状态
+systemctl disable firewalld # 停止
+systemctl stop firewalld  # 禁用
+
+firewall-cmd --reload # 更新防火墙规则
+
+取消锁定
+systemctl unmask firewalld
+添加临时新端口
+firewall-cmd --add-port=443/tcp
+
+# 查看防火墙，添加的端口也可以看到
+firewall-cmd --list-all
+
+
+查看安装的软件路径
+whereis
+unzip 
+tar cvf etcbak.tar etc/  打包一个tar
+tar xvf etcbak.tar         解开一个tar
+tar cvzf etcbak.tar.gz etc/ 打包压缩一个 tar
+tar zxvf etcbak.tar.gz  解压一个tar
+
+查看安装的软件
+rpm -qa | grep ruby
+查看进程
+ps -ef|grep nginx
+杀进程
+kill -TERM 
+查看当前所有目录
+ls -a
+
+nginx 启动，停止
+
+./nginx 
+./nginx -s reload
+./nginx -s quit         :此方式停止步骤是待nginx进程处理任务完毕进行停止。
+./nginx -s stop         :此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。
+
+
+直接进入用户的home目录: cd ~
+进入上一个目录: cd -
+进入当前目录的上一层目录: cd ..
+进入当前目录的上两层目录: cd ../..
+
+nginx 查看安装位置
+whereis nginx
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 2222 -j ACCEPT开启端口
+
+-I INPUT -s 113.106.93.110 -p tcp --dport 8080 -j ACCEPT     禁止端口
+
+找出/home/fuyuan下所有空子目录:
+find /home/fuyaun -maxdepth 1 -type d -empty
+
+解压文件
+tar  -zxvf  libfastcommon-master.zip
+
+unzip libfastcommon-master.zip
+
+ 删除
+rm -f nginx-1.5.9
+创建文件夹
+mkdir /home/fuyuan/yum
+
+拷贝数据
+mv /home/cmfchina/jdk1.8.0_131 /usr/java
+
+环境变量
+vim /etc/profile      vim /etc/sudoers 
+
+强制保存文件
+:w !sudo tee % 
+
+yum check-update
+yum update
+yum clean all
+
+vi /etc/sysconfig/iptables 
+service  iptables status
+service iptables  start          #启动服务
+service iptables  stop　　   #停止服务
+service iptables  restart　　#重启服务
+
+wget http://nginx.org/download/nginx-1.5.9.tar.gz
+
+wget http://nginx.org/download/nginx-1.8.0.tar.gz 
+./configure --prefix=/usr/local/nginx --add-module=/usr/local/fastdfs-nginx-module-master/src/
+
+tar -zxvf nginx-1.8.0.tar.gz
+ tar -zxvf fastdfs-nginx-module_v1.16.tar.gz
+jdk 安装 
+export JAVA_HOME=/usr/fuyuan/java/jdk1.8.0_181
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
+export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
+export PATH=$PATH:${JAVA_PATH}
+
+redis 启动 
+redis-server redis.windows.conf

@@ -1,0 +1,6 @@
+
+java -jar xx.jar --server.port=     //启动项目设置服务
+
+nohup java -jar CountrysideInstitute-0.0.1-SNAPSHOT.jar &
+
+serve -s dist 启动前端

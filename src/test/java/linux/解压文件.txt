@@ -1,0 +1,10 @@
+
+unzip 
+tar cvf etcbak.tar etc/  打包一个tar
+tar xvf etcbak.tar         解开一个tar
+tar cvzf etcbak.tar.gz etc/ 打包压缩一个 tar
+tar zxvf etcbak.tar.gz  解压一个tar
+
+解压 rar
+rar x etc.rar 
+unrar -e etc.tar

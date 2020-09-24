@@ -1,0 +1,106 @@
+一.创建索引
+1.要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引 
+
+二.避免在索引上使用计算
+效率低：
+
+ select * from user where salary*22>11000(salary是索引列)
+1
+效率高：
+
+ select * from user where salary>11000/22(salary是索引列)
+
+四.调整Where字句中的连接顺序
+DBMS一般采用自下而上的顺序解析where字句，根据这个原理表连接最好写在其他where条件之前，那些可以 
+过滤掉最大数量记录。
+
+五.尽量将多条SQL语句压缩到一句SQL中
+
+六.用where字句替换HAVING字句
+避免使用HAVING字句，因为HAVING只会在检索出所有记录之后才对结果集进行过滤，而where则是在聚合前 
+刷选记录，如果能通过where字句限制记录的数目，那就能减少这方面的开销。HAVING中的条件一般用于聚合函数 
+的过滤，除此之外，应该将条件写在where字句中。
+
+
+七.使用表的别名
+当在SQL语句中连接多个表时，请使用表的别名并把别名前缀于每个列名上。这样就可以减少解析的时间并减 
+少哪些友列名歧义引起的语法错误。
+
+8.尽量是查询条件不为空 以免全表查询
+
+
+
+对于连续的数值，能用 between 就不要用 in 了：
+
+    select id from t where num between 1 and 3 
+
+
+十四.更新Update语句优化
+1.如果只更改1、2个字段，不要Update全部字段，否则频繁调用会引起明显的性能消耗，同时带来大量日志
+
+例如：表A（小表），表B（大表）
+
+
+ select * from A where cc in (select cc from B) 效率低，用到了A表上cc列的索引；   
+
+  
+ select * from A where exists(select cc from B where cc=A.cc)   效率高，用到了B表上cc列的索引。
+
+   
+相反的
+
+ 
+select * from B where cc in (select cc from A)  效率高，用到了B表上cc列的索引；
+
+
+ select * from B where exists(select cc from A where cc=B.cc)  效率低，用到了A表上cc列的索引。  
+
+
+应尽量避免在 where 子句中使用!=或<>操作符，否则将引擎放弃使用索引而进行全表扫描。
+
+
+用union all 代表or
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

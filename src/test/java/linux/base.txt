@@ -1,0 +1,94 @@
+ root
+fuyuan199852        java -version
+
+
+
+linx 账号
+  fuyuan
+  fy199852..
+
+
+查看进程
+ps -ef|grep java
+
+ps -ef|grep node
+
+
+ 删除
+rm -f nginx-1.5.9
+创建文件夹
+mkdir /home/fuyuan/yum
+
+
+查看安装的软件
+rpm -qa | grep ruby
+
+
+vim /etc/profile
+
+source /etc/profile //重新加载配置文件
+
+
+cd ..         cd ../         返回上一级目录
+
+cd ../..               返回上两级目录
+
+cd或cd ~           返回home目录
+
+cd - 目录名       返回指定目录
+
+
+杀进程
+kill -TERM
+
+nginx 启动，停止
+
+环境变量
+vim /etc/profile      vim /etc/sudoers
+
+./nginx
+./nginx -s reload
+./nginx -s quit         :此方式停止步骤是待nginx进程处理任务完毕进行停止。
+./nginx -s stop         :此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。
+
+
+ :w   保存文件但不退出vi
+
+　　 :w file 将修改另外保存到file中，不退出vi
+
+　　 :w!   强制保存，不推出vi
+
+　　 :wq  保存文件并退出vi
+
+　　 :wq! 强制保存文件，并退出vi
+
+　　 q:  不保存文件，退出vi
+
+　　 :q! 不保存文件，强制退出vi
+
+　　 :e! 放弃所有修改，从上次保存文件开始再编辑
+
+
+拷贝数据
+mv /home/cmfchina/jdk1.8.0_131 /usr/java
+
+yum check-update
+yum update
+yum clean all
+
+查找文件
+find / -name nginx
+
+查看当前所有目录
+ls -a
+ls
+安装 postgresql 地址
+https://www.cnblogs.com/shhnwangjian/p/8392050.html
+
+jdk 安装
+export JAVA_HOME=/usr/fuyuan/java/jdk1.8.0_181
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
+export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
+export PATH=$PATH:${JAVA_PATH}
+

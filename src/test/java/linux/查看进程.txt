@@ -1,0 +1,60 @@
+
+kill -STOP [pid]
+发送SIGSTOP (17,19,23)停止一个进程，而并不消灭这个进程。
+kill -CONT [pid]
+发送SIGCONT (19,18,25)重新开始一个停止的进程。
+kill -KILL [pid]
+发送SIGKILL (9)强迫进程立即停止，并且不实施清理操作。
+kill -9 -1
+终止你拥有的全部进程。
+
+
+方法三: killall 通过程序的名字,来杀死进程
+
+例如: killall firefox
+注意: 该命令可以使用 -9 参数来强制杀死进程, killall -9 firefox
+
+方法四: pkill 通过程序的名字, 直接杀死所有进程
+例如: pkill firefox
+
+方法五: 通过xkill 可以杀死图形程序应用, 例如firefox崩溃无响应,可以使用该命令.
+例如: 用法xkill , 会出现一个白色的x, 然后用鼠标单击想要杀死的应用,如图
+
+
+查看内存
+free -m
+查看占用内存最高的5个进程
+ps aux | sort -k4nr | head -n 5
+
+查看占用CPU最高的5个进程
+ps aux | sort -k3nr | head -n 5
+
+
+
+Df命令是linux系统以磁盘分区为单位查看文件系统，可以加上参数查看磁盘剩余空间信息，命令格式：
+df -hl
+
+1 查看CPU
+
+1.1 查看CPU个数
+
+# cat /proc/cpuinfo | grep "physical id" | uniq | wc -l
+
+2 **uniq命令：删除重复行;wc –l命令：统计行数**
+
+1.2 查看CPU核数
+
+# cat /proc/cpuinfo | grep "cpu cores" | uniq
+cpu cores : 4
+
+1.3 查看CPU型号
+
+# cat /proc/cpuinfo | grep 'model name' |uniq
+model name : Intel(R) Xeon(R) CPU E5630 @ 2.53GHz
+
+总结：该服务器有2个4核CPU，型号Intel(R) Xeon(R) CPU E5630 @ 2.53GHz
+
+2.1 查看内存总数
+
+#cat /proc/meminfo | grep MemTotal
+MemTotal: 32941268 kB //内存32G
