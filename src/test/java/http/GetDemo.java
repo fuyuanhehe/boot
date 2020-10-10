@@ -56,6 +56,8 @@ public class GetDemo {
             connection.connect();
             // 4. 得到响应状态码的返回值 responseCode
             int code = connection.getResponseCode();
+
+
             // 5. 如果返回值正常，数据在网络中是以流的形式得到服务端返回的数据
             String msg = "";
             if (code == 200) { // 正常响应

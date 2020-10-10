@@ -38,6 +38,8 @@ public class ResDemo {
         System.out.println(Thread.currentThread().getName()+"消费商品::::::"+num);
         notify();
 
+
+
     }
 
 

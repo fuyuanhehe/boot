@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
-public class main {
+public class Filetest {
 
 
     public static void main(String[] args) throws Exception {
