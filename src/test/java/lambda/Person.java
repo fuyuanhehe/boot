@@ -1,6 +1,7 @@
 package lambda;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -45,6 +46,26 @@ public class Person  implements Serializable {
         return age;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public void setJob(String job) {
         this.job = job;
     }
@@ -63,5 +84,25 @@ public class Person  implements Serializable {
                 ", salary=" + salary +
                 ", age=" + age +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return salary == person.salary &&
+                age == person.age &&
+                Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(job, person.job) &&
+                Objects.equals(gender, person.gender);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(firstName, lastName, job, gender, salary, age);
     }
 }
