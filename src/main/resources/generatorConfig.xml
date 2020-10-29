@@ -47,5 +47,5 @@
 
     </context>
 
-
+<!-- mybatis-generator:generate -e -->
 </generatorConfiguration>
