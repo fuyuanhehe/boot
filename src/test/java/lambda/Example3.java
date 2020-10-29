@@ -44,7 +44,7 @@ public class Example3 {
         // 打印挣1400美元以上的PHP程序员
         System.out.println("打印挣3400美元以上的PHP程序员:");
         phpProgrammers.stream()
-                .filter((p) -> (p.getSalary() > 3400))
+                .filter( p -> (p.getSalary() > 3400))
                 .forEach((p) -> System.out.printf("%s %s; ", p.getFirstName(), p.getLastName()));
 
         // Define some filters
