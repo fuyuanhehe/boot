@@ -1,13 +1,13 @@
-package lambda;
+package thread;
 
-public class t1 extends Thread {
+public class tun_start extends Thread {
 
 
 
     public static void main(String[] args) {
-        t1 t = new t1();
+      /*  t1 t = new t1();
           t.start();
-          t.run();
+          t.run();*/
 
      //   t1.run();  只是调用了一个普通方法，并没有启动另一个线程，程序还是会按照顺序执行相应的代码。
 

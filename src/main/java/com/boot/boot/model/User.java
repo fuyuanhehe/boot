@@ -123,4 +123,13 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, username, password, salt, list, maps);
     }
+
+
+    public static void main(String[] args) {
+
+       User u = null;
+
+        System.out.println(u.getPassword());
+    }
+
 }
