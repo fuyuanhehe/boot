@@ -7,8 +7,9 @@ public class CCtticDateUtils {
     /**
      * 说明：format日期数据，返回字符串
      * */
-    public static String formatDate(Date date, String pattern) {
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
+    public static String formatDate(Date date) {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }
 
