@@ -93,7 +93,7 @@ public class User {
     }
      @PostConstruct
     public void test33(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.println("------------------22222");
         }
 
@@ -101,12 +101,12 @@ public class User {
 
     @PreDestroy
     public void test3344(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.println("------------------3333");
         }
     }
 
-/*    @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -117,7 +117,7 @@ public class User {
                 Objects.equals(salt, user.salt) &&
                 Objects.equals(list, user.list) &&
                 Objects.equals(maps, user.maps);
-    }*/
+    }
 
     @Override
     public int hashCode() {
@@ -125,11 +125,6 @@ public class User {
     }
 
 
-    public static void main(String[] args) {
 
-       User u = null;
-
-        System.out.println(u.getPassword());
-    }
 
 }

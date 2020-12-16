@@ -1,6 +1,6 @@
 package xmls;
 
-import com.boot.boot.config.SpringUtil;
+
 import com.boot.boot.model.User;
 import com.boot.boot.model.u2;
 import org.apache.poi.ss.formula.functions.T;
@@ -43,11 +43,7 @@ public class t1 {
           //  String a = User.class.getClassLoader().getResource("").getPath();
           //  System.out.println(a);
 
-            SpringUtil springUtil = new SpringUtil();
 
-            //System.out.println(springUtil.getApplicationContext().getBean(UserService) );
-
-            //System.out.println(  );
         } catch (Exception e) {
             e.printStackTrace();
         }

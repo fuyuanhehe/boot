@@ -2,6 +2,9 @@ package com.boot.boot.mapper;
 
 import com.boot.boot.model.User;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +19,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User getUserByUsername(String username);
+
+    List<User> getUserList(Map map);
+
 }

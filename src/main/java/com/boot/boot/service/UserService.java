@@ -1,6 +1,10 @@
 package com.boot.boot.service;
 
 import com.boot.boot.model.User;
+import com.github.pagehelper.PageInfo;
+
+import java.util.Map;
+
 
 public interface UserService {
 	
@@ -9,4 +13,8 @@ public interface UserService {
 
     /** 新增用户 **/
     void insertUser(User user);
+
+
+    PageInfo<User> findPage(Map map);
+
 }

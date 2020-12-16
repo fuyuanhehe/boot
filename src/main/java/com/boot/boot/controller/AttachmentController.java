@@ -1,3 +1,4 @@
+/*
 package com.boot.boot.controller;
 
 import java.io.Serializable;
@@ -20,12 +21,14 @@ import com.boot.boot.service.FastDfsService;
 import com.boot.boot.util.ResponseMsg;
 
 
+*/
 /**
 功能说明：     附件信息
 @version  1.0.0
 @author  xgYin
 @date  2016年12月13日
-*/
+*//*
+
 @RestController
 @RequestMapping("/attachment")
 public class AttachmentController implements Serializable {
@@ -36,7 +39,8 @@ public class AttachmentController implements Serializable {
 	@Autowired
 	private FastDfsService attachmentService;
 	
-	/**
+	*/
+/**
 	 * 根据业务ID获取附件信息
 	 * 
 	 * @param pageRequest
@@ -45,7 +49,8 @@ public class AttachmentController implements Serializable {
 	 *            查询条件
 	 * @return JSON
 	 * @throws AppException
-	 */
+	 *//*
+
 	@RequestMapping(value="/getPages",method= {RequestMethod.GET,RequestMethod.POST})
 	public ResponseMsg<List<Attachment>> getAttachments(PageRequest page) throws Exception {
 		ResponseMsg<List<Attachment>>  resp = new ResponseMsg<List<Attachment>>();
@@ -76,11 +81,13 @@ public class AttachmentController implements Serializable {
 		return resp;
 	}
 	
-	/**
+	*/
+/**
 	 * 根据ID删除附件信息
 	 * @param id
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping(value="/remove",method= {RequestMethod.GET,RequestMethod.POST})
 	public ResponseMsg<String> deleteAttachment(String attachmentId) {
 		ResponseMsg<String> resp = new ResponseMsg<String>();
@@ -96,7 +103,8 @@ public class AttachmentController implements Serializable {
 	}
 	
 	
-	/**
+	*/
+/**
 	 * 上传附件
 	 * 
 	 * @param pageRequest
@@ -104,7 +112,8 @@ public class AttachmentController implements Serializable {
 	 * @param post
 	 *            查询条件
 	 * @return JSON
-	 */
+	 *//*
+
 	@RequestMapping(value="/upload",method= {RequestMethod.GET,RequestMethod.POST})
 	public ResponseMsg<Attachment> uploadAttachment(MultipartFile uploadFile, Integer fileType) {
 		ResponseMsg<Attachment> resp = new ResponseMsg<Attachment>();
@@ -119,11 +128,13 @@ public class AttachmentController implements Serializable {
 		return resp;
 	}
 	
-	/**
+	*/
+/**
 	 * 附件下载
 	 * @param attachmentId
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping(value="/download",method= {RequestMethod.GET,RequestMethod.POST})
 	public ResponseEntity<byte[]> downloadAttachment(String attachmentId){
 		HttpHeaders headers = new HttpHeaders();
@@ -133,3 +144,4 @@ public class AttachmentController implements Serializable {
 		return new ResponseEntity<byte[]>(atta.getFileBytes(),headers,HttpStatus.OK);
 	}		
 }
+*/

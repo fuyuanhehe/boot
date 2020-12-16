@@ -89,4 +89,17 @@
       salt = #{salt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="getUserList" resultType="com.boot.boot.model.User" parameterType="java.util.Map">
+    select * from user
+
+    <where>
+      <if test="username != null">
+        username = #{username}
+      </if>
+    </where>
+
+  </select>
+
 </mapper>

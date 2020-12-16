@@ -1,3 +1,4 @@
+/*
 package com.boot.boot.logger;
 
 import java.util.Date;
@@ -76,3 +77,4 @@ public class UserOperLoggerServiceImpl implements UserOperLoggerService {
     }
 
 }
+*/

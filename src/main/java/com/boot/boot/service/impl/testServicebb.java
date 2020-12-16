@@ -14,6 +14,9 @@ public class testServicebb implements testService {
 
     @Override
     public User getUser(int id) {
-        return null;
+        System.out.println("获取用户--->22");
+        User u = new User();
+        u.setId(6666);
+        return u;
     }
 }
