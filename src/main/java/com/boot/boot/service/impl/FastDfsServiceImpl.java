@@ -55,15 +55,14 @@ public class FastDfsServiceImpl implements FastDfsService {
 		return attachmentMapper.findAttachmentById(attachmentId);
 	}
 
-	*/
-/**
+*
 	 * 上传文件
 	 * 
 	 * @param file
 	 *            文件对象
 	 * @return 文件访问地址
 	 * @throws IOException
-	 *//*
+
 
 	@Transactional
 	public Attachment uploadFile(MultipartFile file,Integer fileType) throws IOException {
@@ -100,13 +99,12 @@ public class FastDfsServiceImpl implements FastDfsService {
 		return atta;
 	}
 	
-	*/
-/**
+*
 	 * 下文件
 	 * 
 	 * @param attachmentId
 	 * @param callback
-	 *//*
+
 
 	@Transactional
 	public Attachment downloadFile(String attachmentId) {
@@ -116,14 +114,13 @@ public class FastDfsServiceImpl implements FastDfsService {
 		return atta;
 	}
 
-	*/
-/**
+*
 	 * 删除文件
 	 * 
 	 * @param fileUrl
 	 *            文件访问地址
 	 * @return
-	 *//*
+
 
 	@Transactional
 	public void deleteFile(String attachmentId) {

@@ -1,8 +1,5 @@
 package lambda;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  *
  * @author Alin
@@ -14,11 +11,7 @@ public class Example1 {
      */
     public static void main(String[] args) {
 
-        String[] atp = {"Rafael Nadal", "Novak Djokovic", "Stanislas Wawrinka", "David Ferrer", "Roger Federer", "Andy Murray", "Tomas Berdych", "Juan Martin Del Potro", "Richard Gasquet", "John Isner"};
-        List<String> players =  Arrays.asList(atp);
 
-    //    players.forEach(System.out::println);
-        System.out.println("-----");
 
         // Using anonymous innerclass
         new Thread(new Runnable() {
@@ -29,18 +22,18 @@ public class Example1 {
         }).start();
 
         // Using lambda expression
-        new Thread(() -> System.out.println("Hello world !")).start();
+        new Thread(() -> System.out.println("Hello world 2!")).start();
 
         // Using anonymous innerclass
         Runnable race1 = new Runnable() {
             @Override
             public void run() {
-                System.out.println("Hello world !");
+                System.out.println("Hello world3 !");
               }
         };
 
         // Using lambda expression
-        Runnable race2 = () -> System.out.println("Hello world !");
+        Runnable race2 = () -> System.out.println("Hello world4 !");
 
         // Run em!
         System.out.println("-----");

@@ -22,7 +22,7 @@
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    *
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -31,11 +31,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.boot.boot.model.User" >
-    insert into user (id, username, password, 
-      salt)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR})
+    insert into user (id, username
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR})
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.boot.boot.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -84,9 +85,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.boot.boot.model.User" >
     update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR}
+    set username = #{username,jdbcType=VARCHAR}
+
     where id = #{id,jdbcType=INTEGER}
   </update>
 

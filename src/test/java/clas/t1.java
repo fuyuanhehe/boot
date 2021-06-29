@@ -15,7 +15,7 @@ public class t1 {
         //  System.out.println(u.getSimpleName()); //User
        // System.out.println(u.getName()); //com.boot.boot.model.User
       //  System.out.println(u.getCanonicalName()); //com.boot.boot.model.User
-      /*  Field[] fields = u.getDeclaredFields(); // 获取字段
+      /*  Field[] fields = u.getDeclaredFields(); // 获取字段  getFields这个方法只返回public得
         for (Field f :fields) {
             System.out.println(f.getName()); // username
             System.out.println(f.getType().getSimpleName()); // string

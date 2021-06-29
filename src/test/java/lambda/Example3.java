@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import static java.util.stream.Collectors.*;
 
 /**
- *
  * @author Alin
  */
 public class Example3 {
@@ -18,10 +17,10 @@ public class Example3 {
 
         List<Person> javaProgrammers = new ArrayList<Person>() {
             {
-                add(new Person("小王", "小王1", "Java programmer", "male", 15, 2000));
-                add(new Person("老王", "老王1", "Java programmer", "female", 22, 1500));
-                add(new Person("老张", "老张1", "Java programmer", "male", 8, 1800));
-                add(new Person("二狗", "二狗1", "Java programmer", "female", 66, 5000));
+                add(new Person("小王", "小王1", "Java programmer", "male", 15, 20));
+                add(new Person("老王", "老王1", "Java programmer", "female", 22, 150));
+                add(new Person("老张", "老张1", "Java programmer", "male", 8, 10));
+                add(new Person("二狗", "二狗1", "Java programmer", "female", 66, 50));
             }
         };
 
@@ -37,14 +36,14 @@ public class Example3 {
 
 
         // 涨百分之5的工资
-     //   System.out.println("涨百分之5的工资");
-     //   Consumer<Person> giveRaise = e -> e.setSalary(e.getSalary() / 100 * 5 + e.getSalary());
-       // javaProgrammers.forEach(giveRaise);
+        //   System.out.println("涨百分之5的工资");
+        //   Consumer<Person> giveRaise = e -> e.setSalary(e.getSalary() / 100 * 5 + e.getSalary());
+        // javaProgrammers.forEach(giveRaise);
 
         // 打印挣1400美元以上的PHP程序员
         System.out.println("打印挣3400美元以上的PHP程序员:");
         phpProgrammers.stream()
-                .filter( p -> (p.getSalary() > 3400))
+                .filter(p -> (p.getSalary() > 3400))
                 .forEach((p) -> System.out.printf("%s %s; ", p.getFirstName(), p.getLastName()));
 
         // Define some filters
@@ -122,7 +121,8 @@ public class Example3 {
                 .map(Person::getFirstName)
                 .collect(toSet());
 
-        javaDevFirstName.stream().forEach((s) -> System.out.printf("%s ", s));;
+        javaDevFirstName.stream().forEach((s) -> System.out.printf("%s ", s));
+        ;
 
         System.out.println("设置Java程序员的名字to TreeSet:");
         TreeSet<String> javaDevLastName = javaProgrammers

@@ -26,18 +26,18 @@ public class read {   // 读取锁 可同时读
     }
 
     public void get(Thread thread) {
-      //  rwl.readLock().lock();
-        rwl.writeLock().lock();
+        rwl.readLock().lock();
+      //  rwl.writeLock().lock();
         try {
             long start = System.currentTimeMillis();
 
-            while(System.currentTimeMillis() - start <= 2) {
+            while(System.currentTimeMillis() - start <= 1) {
                 System.out.println(thread.getName()+"正在进行读操作");
             }
             System.out.println(thread.getName()+"读操作完毕");
         } finally {
-            rwl.writeLock().unlock();
-          //  rwl.readLock().unlock();
+          //  rwl.writeLock().unlock();
+            rwl.readLock().unlock();
 
         }
     }

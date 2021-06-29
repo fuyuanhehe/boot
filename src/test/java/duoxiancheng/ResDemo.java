@@ -14,8 +14,7 @@ public class ResDemo {
             try {
                 wait();
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+
             }
         }
         this.flag=true;
@@ -29,8 +28,7 @@ public class ResDemo {
             try {
                 wait();
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+
             }
         }
         this.flag=false;
@@ -47,10 +45,14 @@ public class ResDemo {
             ResDemo resdemo=new ResDemo(0, false);
             Thread thread1=new Thread(new Thread_1(resdemo),"thread1");
             Thread thread2=new Thread(new Thread_2(resdemo),"thread2");
-            thread2.start();
-            thread1.start();
+         //   thread2.start();
+         //   thread1.start();
 
 
+            int a = 8;
+
+            assert a == 5;
+            System.out.println("!!!!!!!!!!!!");
         }
 
 

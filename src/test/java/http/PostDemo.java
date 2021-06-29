@@ -1,12 +1,12 @@
 package http;
 
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -20,14 +20,15 @@ public class PostDemo {
     public static void main(String[] args) {
         try {
             // 1. 获取访问地址URL
-            String address = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm";
+         //   String address = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm";
+            String address = "http://127.0.0.1:8080/testUser";
             URL url = new URL(address);
             // 2. 创建HttpURLConnection对象
             HttpURLConnection connection = (HttpURLConnection) url
                     .openConnection();
             /* 3. 设置请求参数等 */
             // 请求方式
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("GET");
             // 超时时间
             connection.setConnectTimeout(3000);
             // 设置是否输出
@@ -40,14 +41,18 @@ public class PostDemo {
             connection.setInstanceFollowRedirects(true);
             // 设置使用标准编码格式编码参数的名-值对
             connection.setRequestProperty("Content-Type",
-                    "application/x-www-form-urlencoded");
+                    "application/json");
             // 连接
             connection.connect();
             /* 4. 处理输入输出 */
             // 写入参数到请求中
-            String params = "tel=18782025848";
+         //   String params = "tel=18782025848";
+
+            JSONObject json = new JSONObject();
+           json.put("username",555);
+
             OutputStream out = connection.getOutputStream();
-            out.write(params.getBytes());
+            out.write(json.toString().getBytes());
             out.flush();
             out.close();
             // 从连接中读取响应信息
@@ -68,10 +73,9 @@ public class PostDemo {
 
             // 处理结果
             System.out.println(msg);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

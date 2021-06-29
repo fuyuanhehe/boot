@@ -24,14 +24,15 @@ public class IntegerDui {
 
 
         User q1 = new User();
+        q1.setUsername("a");
         User w1 = new User();
-        User c1 = q1;
 
-        System.out.println(q1 == w1);
-        System.out.println(q1.equals(w1) );
+        System.out.println(q1.equals(w1));
 
-        System.out.println(q1 == c1);
-        System.out.println(q1.equals(c1) );
+
+        Integer a = Integer.valueOf(2);
+        Integer b = Integer.valueOf(2);
+        System.out.println("5："+(a == b));
 
     }
 }

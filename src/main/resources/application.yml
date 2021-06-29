@@ -1,23 +1,44 @@
 server:
-  port: 8888
+  port: 8080
+
 spring:
-  mail:
-    default-encoding: UTF-8
-    host: smtp.qq.com
-    username: 1024767308@qq.com
-    password: ybvtvsnhbbjobdbf
-    port: 25
-    protocol: smtp
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
-          timeout: 25000
-          socketFactory:
-            class: javax.net.ssl.SSLSocketFactory
+  profiles:
+    active: default
+
+
+  rabbitmq:
+    addresses: 127.0.0.1
+    username: guest
+    password: guest
+    port: 5672
+    publisher-confirms: true
+    publisher-returns: true
+    template:
+      mandatory: true
+
+#publisher-confirm： 开启消息到达exchange的回调，发送成功失败都会触发回调
+#publisher-returns: 开启消息从exhcange路由到queue的回调，只有路由失败时才会触发回调
+
+#mandatory: 为true时，如果exchange根据routingKey将消息路由到queue时找不到匹配的queue，
+#触发return回调，为false时，exchange直接丢弃消息。
+
+
+    listener:
+      simple:
+        acknowledge-mode: manual  # 手动ack
+        prefetch: 5
+
+#acknowledge-mode: manual就表示开启手动ack，该配置项的其他两个值分别是none和auto
+#auto：消费者根据程序执行正常或者抛出异常来决定是提交ack或者nack，不要把none和auto搞混了
+#manual: 手动ack，用户必须手动提交ack或者nack
+#none: 没有ack机制
+        retry:
+          enabled: true
+          max-attempts: 5
+          max-interval: 4000ms # 重试最大间隔时间
+          initial-interval: 2000ms  # 重试初始间隔时间
+          multiplier: 2 # 间隔时间乘子，间隔时间*乘子=下一次的间隔时间，最大不能超过设置的最大间隔时间
+
  # redis:
   #  host: 127.0.0.1
   #  port: 6379
@@ -38,7 +59,7 @@ spring:
       initial-size: 1
       max-active: 15
       min-idle: 1
-
+      query-timeout: 5000
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml

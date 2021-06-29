@@ -59,8 +59,8 @@ public class ReentrantLockInterruptDemo {
         t1.start();
         t2.start();
         Thread.sleep(1000);
-        System.out.println("t1 中断");
 
+        System.out.println("t1 中断");
         t1.interrupt();    //  中断锁
 
 

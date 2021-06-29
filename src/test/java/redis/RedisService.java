@@ -1,5 +1,5 @@
 package redis;/*
-package redis;
+package com.boot.boot.service;
 
 public interface RedisService <T> {
 	
@@ -11,7 +11,7 @@ public interface RedisService <T> {
      * @return
      *//*
 
-     boolean set(final Object key, T value);
+    public boolean set(final String key, T value);
     
     */
 /**
@@ -21,7 +21,7 @@ public interface RedisService <T> {
      * @return
      *//*
 
-     boolean set(final Object key, T value, Long expireTime);
+    public boolean set(final String key, T value, Long expireTime);
     
     */
 /**
@@ -30,7 +30,7 @@ public interface RedisService <T> {
      * @return
      *//*
 
-     T get(final Object key);
+    public T get(final String key);
     
     */
 /**
@@ -38,7 +38,7 @@ public interface RedisService <T> {
      * @param keys
      *//*
 
-     void remove(final Object... keys);
+    public void remove(final String... keys);
     
     */
 /**
@@ -46,7 +46,7 @@ public interface RedisService <T> {
      * @param pattern
      *//*
 
-     void removePattern(final Object pattern);
+    public void removePattern(final String pattern);
     
     */
 /**
@@ -55,6 +55,6 @@ public interface RedisService <T> {
      * @return
      *//*
 
-     boolean exists(final Object key);
+    public boolean exists(final String key);
 }
 */

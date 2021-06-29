@@ -24,10 +24,21 @@ docker start 容器ID或容器名
 2. 通过docker start 59ec 启动容器 
 3. 通过docker ps 查看当前启动的容器 
 
+systemctl restart docker.service
 
 
+ systemctl status docker
 systemctl enable docker
 systemctl stop docker 开机关闭docker服务
+
+yum下载docker 启动错误
+  cd /etc/docker
+编辑daemon.json文件：
+加入这段代码：
+{
+ "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+
 
 
 docker stop 容器ID或容器名
@@ -66,6 +77,8 @@ docker search mysql搜索镜像
 docker pull mysql
 
 docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
 
 
 下次启动要 

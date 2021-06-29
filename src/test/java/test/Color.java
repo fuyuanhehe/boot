@@ -5,7 +5,6 @@ public enum  Color {
 
     RED(1,"红色"),BLANK(2,"黑色"),YELLOW(3,"黄色");
 
-
     private String name;
     private int code;
 

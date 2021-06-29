@@ -72,9 +72,20 @@ WHERE
 
 
 转化成字符串
-	to_char(b.update_time, 'YYYY-MM-dd')
+
+select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') as nowTime from dual;   //日期转化为字符串
 
 
+Union，对两个结果集进行并集操作，不包括重复行，同时进行默认规则的排序；
+
+Union All，对两个结果集进行并集操作，包括重复行，不进行排序；
+
+Intersect，对两个结果集进行交集操作，不包括重复行，同时进行默认规则的排序；
+
+Minus，对两个结果集进行差操作，不包括重复行，同时进行默认规则的排序。
 
 
+ceil  11.4  = 12
+floor  11.4  = 11
+trunc 11.9 = 11
 

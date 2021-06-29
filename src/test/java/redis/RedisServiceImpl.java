@@ -1,18 +1,18 @@
 package redis;/*
-package redis;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.boot.boot.service.impl;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Service;
+import com.boot.boot.service.RedisService;
 
 */
 /**
- * 
- * @author syao
  * redis 实用工具
  *//*
 
@@ -24,8 +24,14 @@ public class RedisServiceImpl<T> implements RedisService <T> {
     @Autowired
     private RedisTemplate<Object,T> redisTemplate;
 
+redisTemplate.opsForValue();//操作字符串
+redisTemplate.opsForHash();//操作hash
+redisTemplate.opsForList();//操作list
+redisTemplate.opsForSet();//操作set
+redisTemplate.opsForZSet();//操作有序set
+
 	@Override
-	public boolean set(Object key, T value) {
+	public boolean set(String key, T value) {
         boolean result = false;
         try {
             ValueOperations<Object, T> operations = redisTemplate.opsForValue();
@@ -38,7 +44,7 @@ public class RedisServiceImpl<T> implements RedisService <T> {
 	}
 
 	@Override
-	public boolean set(Object key, T value, Long expireTime) {
+	public boolean set(String key, T value, Long expireTime) {
         boolean result = false;
         try {
             ValueOperations<Object, T> operations = redisTemplate.opsForValue();
@@ -52,7 +58,7 @@ public class RedisServiceImpl<T> implements RedisService <T> {
 	}
 
 	@Override
-	public T get(Object key) {
+	public T get(String key) {
         T result = null;
         
         try {
@@ -66,8 +72,8 @@ public class RedisServiceImpl<T> implements RedisService <T> {
 	}
 
 	@Override
-	public void remove(Object... keys) {
-        for (Object key : keys) {
+	public void remove(String... keys) {
+        for (String key : keys) {
         	if (exists(key)) {
                 redisTemplate.delete(key);
             }
@@ -76,14 +82,14 @@ public class RedisServiceImpl<T> implements RedisService <T> {
 	}
 
 	@Override
-	public void removePattern(Object pattern) {
+	public void removePattern(String pattern) {
         Set<Object> keys = redisTemplate.keys(pattern);
         if (keys.size() > 0)
             redisTemplate.delete(keys);
 	}
 
 	@Override
-	public boolean exists(Object key) {
+	public boolean exists(String key) {
 		  return redisTemplate.hasKey(key);
 	}
 }*/
