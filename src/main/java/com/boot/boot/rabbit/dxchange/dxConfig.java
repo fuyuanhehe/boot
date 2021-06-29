@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class dxConfig {
 
 
-
     @Bean
     public DirectExchange dlxExchange() {
         return new DirectExchange("dlxExchangeName", false, false);
