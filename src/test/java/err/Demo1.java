@@ -7,29 +7,30 @@ public class Demo1 {
     public static void main(String[] args) {
         try {
             print();
-         //   Thread.sleep(200);
         } catch (Exception e) {
-            e.printStackTrace();
+
             System.out.println("打印抛出异常");
         }
         System.out.println("程序结束");
     }
 
     private static void print() {
-        int index = 0;
-        while (index < 15) {
+
+
+        for (int i = 0; i < 10; i++) {
             try {
-                Thread.sleep(10);
-                ++index;
-                System.out.println("index = " + index);
-                if (index == 5 ) {
+
+                System.out.println("正常流程" + i);
+                if (i == 5) {
                     throw new Exception();
                 }
+
             } catch (Exception e) {
-                System.out.println("循环抛出异常");
+                System.out.println("运行异常");
             }
 
         }
-        System.out.println("循环结束");
+
+
     }
 }

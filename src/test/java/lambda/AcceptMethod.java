@@ -1,8 +1,9 @@
 package lambda;
 
 import com.boot.boot.model.User;
-import org.assertj.core.util.Lists;
 
+import java.text.CollationKey;
+import java.text.Collator;
 import java.util.*;
 
 public class AcceptMethod {
@@ -11,35 +12,70 @@ public class AcceptMethod {
     public static void main(String[] args) {
         List<User> userList = new LinkedList<>();
         User u = new User();
-        u.setUsername("b");
+        u.setUsername("测试啊");
         u.setId(55);
 
 
         User u2 = new User();
-        u2.setId(12);
-        u2.setUsername("a");
+        u2.setId(998);
+        u2.setUsername("测试这");
 
         User u21 = new User();
         u21.setId(99);
-        u21.setUsername("c");
+        u21.setUsername("真的啊啊");
+
+        User u3 = new User();
+        u3.setId(220);
+        u3.setUsername("阿阿不");
+
 
         userList.add(u);
         userList.add(u2);
         userList.add(u21);
+        userList.add(u3);
 
+
+     /*   List<User> xx = userList.stream().sorted(Comparator.comparing(User::getUsername)
+                .thenComparing(User::getId)).collect(Collectors.toList());
+
+        xx.stream().forEach(System.out::println);
+
+*/
+
+        Collections.sort(userList, new Comparator<User>() {
+
+            Collator collator = Collator.getInstance(Locale.CHINA);
+            @Override
+            public int compare(User o1, User o2) {
+                CollationKey key1 = collator.getCollationKey(o1.getUsername());
+                CollationKey key2 = collator.getCollationKey(o2.getUsername());
+                return key2.compareTo(key1);
+            }
+        });
+
+        userList.stream().forEach(System.out::println);
+
+
+
+
+       // Map<Integer, String> x = userList.stream().collect(Collectors.toMap(User::getId, User::getUsername));
 
         //大 到 小
-        Collections.sort(userList, (s1, s2) -> s2.getUsername().compareTo(s1.getUsername()));
-
-        System.out.println(userList);
+      //  Collections.sort(userList, (s1, s2) -> s2.getUsername().compareTo(s1.getUsername()));
+      //  System.out.println(userList);
 
         // 小 到  大
-        Collections.sort(userList, (s1, s2) -> s1.getUsername().compareTo(s2.getUsername()));
+      //  Collections.sort(userList, (s1, s2) -> s1.getUsername().compareTo(s2.getUsername()));
+       // System.out.println(userList);
 
-        System.out.println(userList);
+
+       // List<User> userList1 = userList.stream().sorted(Comparator.comparing(User::getUsername)).collect(Collectors.toList());
+      //  userList1.stream().forEach(System.out::println);
 
 
-        Map<String, String> map = new HashMap<>();
+
+      //  Map<String, List<User>> rs = userList.stream().collect(Collectors.groupingBy(User::getUsername));
+     /*   Map<String, String> map = new HashMap<>();
         map.put("2", "ccccc");
         map.put("4", "aaaaa");
         map.put("1", "bbbbb");
@@ -50,37 +86,7 @@ public class AcceptMethod {
 
         for (Map.Entry<String, String> mapping : list) {
             System.out.println(mapping.getKey() + ":" + mapping.getValue());
-        }
-
-        List<Person> personList = Lists.newArrayList();
-
-        Person p2 = new Person();
-        p2.setAge(1);
-        p2.setJob("BB");
-
-        Person p = new Person();
-        p.setAge(3);
-        p.setJob("AA");
-
-        Person p3 = new Person();
-        p3.setAge(2);
-        p3.setJob("DD");
-
-        Person p4 = new Person();
-        p4.setAge(2);
-
-
-        personList.add(p2);
-        personList.add(p);
-        personList.add(p3);
-        personList.add(p4);
-        //     personList.forEach( System.out::println);
-
-        //分组
-        //  Map<String, List<Person>> collect = personList.stream().collect(Collectors.groupingBy(c -> c.getJob()));
-        //  System.out.println(collect);
-
-        //   List<String> c2 = personList.stream().map(a -> a.getJob() + ",").collect(Collectors.toList());
+        }*/
 
 
     }

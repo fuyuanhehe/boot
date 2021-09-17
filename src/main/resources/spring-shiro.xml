@@ -4,41 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
 
 
-    <bean id="users22" class="com.boot.boot.model.User" init-method="test22"
-      destroy-method="test33" >
-
-
-        <property name="username" value="adm"></property>
-        <property name="list" >
-
-            <list >     <value>123</value>
-                <value>12123aa3</value>
-
-            </list>
-
-
-
-        </property>
-
-        <property name="maps" >
-            <map>
-                <entry key="aa" value="asd11"></entry>
-            </map>
-        </property>
-
-    </bean>
-
-
-
-
- <!--   <bean id="users2" class="com.boot.boot.model.User">
-        <constructor-arg value="123"></constructor-arg>
-        <constructor-arg value="adad"></constructor-arg>
-        <constructor-arg value="12345a"></constructor-arg>
-        <constructor-arg value="m5m5m5m5m5m5"></constructor-arg>
-        <constructor-arg value="123"></constructor-arg>
-    </bean>-->
-
 
     <bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter">
         <property name="securityManager" ref="securityManager"/>

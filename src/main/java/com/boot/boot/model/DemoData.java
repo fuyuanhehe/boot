@@ -1,11 +1,10 @@
 package com.boot.boot.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
 @Data
-public class DemoData  extends BaseRowModel {
+public class DemoData   {
     //设置excel表头名称
 
    // @ExcelProperty({"主标题", "字符串标题"})

@@ -3,6 +3,8 @@ package Optional;
 import lambda.Person;
 
 import java.util.Optional;
+import java.util.StringJoiner;
+import java.util.stream.IntStream;
 
 public class Optional1 {
 
@@ -55,13 +57,28 @@ public class Optional1 {
         person5.setAge(222);
         Optional<Object> optional10 = Optional.ofNullable(person4).map(p -> Optional.ofNullable(p).orElse(person5));
 
+
         System.out.println("person4----" + optional10.get());
 
         // 常用方法之一，这个方法意思是如果包装对象为空的话，
         // 就执行orElse方法里的value，如果非空，则返回写入对象 源码:
-        String str = "aaa";
+        String str = null;
 
         System.out.println(Optional.ofNullable(str).orElse("bbb"));
+
+        //值依次是分割符 , 前缀  ,后缀
+        StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
+        stringJoiner.add("xiao");
+        stringJoiner.add("zhi");
+        System.out.println(stringJoiner.toString());
+
+        StringJoiner sj = new StringJoiner(",");
+        IntStream.range(1, 5).forEach(i -> sj.add(i + ""));
+        System.out.println(sj.toString());
+
+
+
+
 
     }
 

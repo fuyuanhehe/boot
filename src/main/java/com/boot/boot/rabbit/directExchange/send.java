@@ -2,12 +2,11 @@ package com.boot.boot.rabbit.directExchange;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -37,11 +36,25 @@ public class send {
         });
 
 
-        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-
-        rabbitTemplate.convertAndSend(exchangeName, "error", "发布到绑定routing-key是log.error的队列", correlationData);
+        //   CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
 
 
+        rabbitTemplate.convertAndSend(exchangeName, "error", "发布到绑定routing-key是log.error的队列");
+
+
+    }
+
+
+    @GetMapping("send2")
+    public String send2() {
+
+        rabbitTemplate.convertAndSend(exchangeName, "error", "测试会过期的", message -> {
+            message.getMessageProperties().setExpiration("20000");
+            return message;
+        });
+
+
+        return "创建订单成功";
     }
 
 

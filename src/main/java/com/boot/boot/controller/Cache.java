@@ -1,37 +1,61 @@
 package com.boot.boot.controller;
 
 import com.boot.boot.mapper.UserMapper;
-import com.boot.boot.model.User;
+import com.boot.boot.redis.RedisServiceImpl;
 import com.boot.boot.service.testService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.concurrent.Executor;
 
 @RestController
 @RequestMapping
-
+@Slf4j
 public class Cache {
 
-
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
-   /* @Autowired
+    @Autowired
     @Qualifier("testService1")
-    testService testService;*/
-
+    testService testService;
     @Autowired
     testService testService1;
 
     @Autowired
     testService testServicebb;
-
     @Resource
     UserMapper userMapper;
+    @Autowired
+    RedisServiceImpl<Object> redisService;
+
+
+    @Autowired
+    @Qualifier("asyncServiceExecutor")
+    private Executor executor;
+
+
+    @GetMapping("/async")
+    public void async() {
+
+        executor.execute(
+                () ->
+                {
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    log.info("11111111111111111111111111111");
+
+                }
+        );
+
+    }
 
     /**
      * allEntries是否移除所有缓存条目。
@@ -45,22 +69,22 @@ public class Cache {
         return id;
     }
 */
-    // https://github.com/modouxiansheng/Doraemon/tree/master/springdemo
+    @RequestMapping("set")
+    public void set(String key, String value) {
+        redisService.set(key, value);
 
+    }
 
+    @RequestMapping("set2")
+    public void set2(String key, String value, long time) {
+        redisService.set(key, value, time);
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    @RequestMapping("get")
+    public Object get(String key) {
+        return redisService.get(key);
+    }
 
     /**
      * 当调用这个方法的时候，会从一个名叫 scf_company的缓存中查询，
@@ -86,11 +110,6 @@ public class Cache {
     }
 
     */
-    @RequestMapping("/testUser")
-    public Object testUser(@RequestBody User u) {
-        System.out.print(u);
-        return u;
-    }
 
 
 }

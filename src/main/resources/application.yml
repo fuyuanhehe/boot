@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: default
+    active: dev
 
 
   rabbitmq:
@@ -39,19 +39,12 @@ spring:
           initial-interval: 2000ms  # 重试初始间隔时间
           multiplier: 2 # 间隔时间乘子，间隔时间*乘子=下一次的间隔时间，最大不能超过设置的最大间隔时间
 
- # redis:
-  #  host: 127.0.0.1
-  #  port: 6379
-  #  timeout: 5000
-  #  pool:
-  #    max-wait: -1
- #     max-active: 10
-  #    max-idle: 10
- #     min-idle: 0
+
+
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -60,6 +53,20 @@ spring:
       max-active: 15
       min-idle: 1
       query-timeout: 5000
+
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000ms
+    jedis:
+      pool:
+        max-active: 10
+        min-idle: 1
+        max-wait: -1ms
+        max-idle: 2
+
+
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml

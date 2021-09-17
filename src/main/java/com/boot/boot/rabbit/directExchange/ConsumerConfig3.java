@@ -25,11 +25,16 @@ public class ConsumerConfig3 {
     private String queueName = "queueName";
 
 
+
+    //durable：true、false true：在服务器重启时，能够存活
+    //exclusive ：是否为当前连接的专用队列，在连接断开后，会自动删除该队列，生产环境中应该很少用到吧。
+    //autodelete：当没有任何消费者使用时，自动删除该队列。this means that the queue will be deleted when there are no more processes consuming messages from it.
+    //
   /*  @Bean
-    public Queue consumerQueue99() {
-        return new Queue(queueName, false);
-    }
-*/
+    public Queue consumerQueue844854() {
+        return new Queue("test", false,false,false,null);
+    }*/
+
 
     /**
      * 业务队列
@@ -51,6 +56,8 @@ public class ConsumerConfig3 {
     }
 
 
+
+
     /**
      * 声明直连交换机
      *
@@ -58,7 +65,7 @@ public class ConsumerConfig3 {
      */
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange(exchangeName, false, false);
+        return new DirectExchange(exchangeName, true, false);
     }
   /*  @Bean
     public TopicExchange topicExchange() {

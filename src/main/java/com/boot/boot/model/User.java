@@ -3,8 +3,12 @@ package com.boot.boot.model;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -13,11 +17,15 @@ import java.util.Date;
 
 
 @Data
-public class User implements Serializable {
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
+public class User implements Serializable, Cloneable {
 
     @ExcelProperty(index = 0, value = "id")
     public int id;
+    private Head head;
     @ExcelProperty(index = 1, value = "username")
     private String username;
     @ExcelProperty(index = 2, value = "password")
@@ -42,6 +50,7 @@ public class User implements Serializable {
     @Value("${www.fuyuan}")
     private String value;
 
+
     @PostConstruct
     public void test33() {
         for (int i = 0; i < 3; i++) {
@@ -58,5 +67,24 @@ public class User implements Serializable {
         }
     }
 
+    @Override
+    protected User clone() throws CloneNotSupportedException {
+        User x = (User) super.clone();
+        x.head = (Head) head.clone();
+
+        return x;
+    }
+
+    @Data
+    private static class Head implements Cloneable {
+
+        private Head() {
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
+    }
 
 }

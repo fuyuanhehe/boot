@@ -1,7 +1,6 @@
 package lambda;
 
 /**
- *
  * @author Alin
  */
 public class Example1 {
@@ -10,7 +9,6 @@ public class Example1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
 
 
         // Using anonymous innerclass
@@ -29,11 +27,16 @@ public class Example1 {
             @Override
             public void run() {
                 System.out.println("Hello world3 !");
-              }
+            }
         };
 
         // Using lambda expression
         Runnable race2 = () -> System.out.println("Hello world4 !");
+
+
+         new Thread(
+
+         ).start();
 
         // Run em!
         System.out.println("-----");

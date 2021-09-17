@@ -35,7 +35,7 @@ public class CCtticDateUtils {
      * 获取时间戳
      */
     public static Long getTimeStamp(){
-        return new Date().getTime();
+        return System.currentTimeMillis();
     }
 
     /**
@@ -100,7 +100,7 @@ public class CCtticDateUtils {
         //该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数
 
         // String timeStamp =(System.currentTimeMillis() / 1000 ) +"";
-        String timeStamp = new Date().getTime() + "";
+        String timeStamp = System.currentTimeMillis() + "";
 
         System.out.println(timeStamp);
         String date = timeStamp2Date(timeStamp, "yyyy-MM-dd HH:mm:ss");

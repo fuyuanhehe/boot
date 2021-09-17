@@ -1,4 +1,3 @@
-/*
 package com.boot.boot.shiro;
 
 import org.apache.shiro.cache.Cache;
@@ -17,4 +16,3 @@ public class CustomCacheManager implements CacheManager{
         return customCache;
     }
 }
-*/

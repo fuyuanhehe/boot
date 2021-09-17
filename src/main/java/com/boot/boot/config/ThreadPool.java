@@ -3,9 +3,8 @@ package com.boot.boot.config;
 import java.util.concurrent.*;
 
 
- public class ThreadPool {
-    private static ExecutorService pool;
-
+public class ThreadPool {
+    private static ExecutorService pool = null;
 
    /* corePoolSize:指定了线程池中的线程数量，它的数量决定了添加的任务是开辟新的线程去执行，还是放到workQueue任务队列中去；
     maximumPoolSize:指定了线程池中的最大线程数量，这个参数会根据你使用的workQueue任务队列的类型，决定线程池会开辟的最大线程数量；
@@ -17,8 +16,6 @@ import java.util.concurrent.*;
 
 
     public static void main(String[] args) {
-
-
         //maximumPoolSize设置为2 ，拒绝策略为AbortPolic策略，直接抛出异常
 
         /* 直接提交队列
@@ -29,10 +26,10 @@ import java.util.concurrent.*;
         你需要对你程序的并发量有个准确的评估，才能设置合适的maximumPoolSize数量，
         否则很容易就会执行拒绝策略；
         */
-     //   pool = new ThreadPoolExecutor(1, 3, 1000, TimeUnit.MILLISECONDS, new SynchronousQueue<>(), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+        //   pool = new ThreadPoolExecutor(1, 3, 1000, TimeUnit.MILLISECONDS, new SynchronousQueue<>(), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
 
-       // 有界任务队列
-        pool = new ThreadPoolExecutor(1, 2, 1000, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(10),Executors.defaultThreadFactory(),new ThreadPoolExecutor.AbortPolicy());
+        // 有界任务队列
+        pool = new ThreadPoolExecutor(5, 10, 1000, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(10), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
        /* 使用ArrayBlockingQueue有界任务队列，若有新的任务需要执行时，线程池会创建新的线程，
         直到创建的线程数量达到corePoolSize时，则会将新的任务加入到等待队列中。若等待队列已满，
         即超过ArrayBlockingQueue初始化的容量，则继续创建线程，
@@ -51,18 +48,29 @@ import java.util.concurrent.*;
        一定要注意你任务提交与处理之间的协调与控制，不然会出现队列中的任务由于无法及时处理导致一直增长，
        直到最后资源耗尽的问题。
        */
-        for (int i = 0; i < 3; i++) {
-            pool.execute(new ThreadTask());
 
-
-        }
-
-        pool.execute(()-> {
-
-
-
-
+        pool.execute(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
+        pool.execute(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        System.out.println(((ThreadPoolExecutor) pool).getMaximumPoolSize());
+        System.out.println(((ThreadPoolExecutor) pool).getCorePoolSize());
+
+        //正在运行线程大小
+        System.out.println(((ThreadPoolExecutor) pool).getActiveCount());
+        System.out.println(((ThreadPoolExecutor) pool).getPoolSize());
+
 
         /*
           //优先任务队列 implements Runnable,Comparable<ThreadTask>
@@ -84,12 +92,13 @@ import java.util.concurrent.*;
     }
 }
 
- class ThreadTask implements Runnable {
+class ThreadTask implements Runnable {
 
-     public ThreadTask() {
+    public ThreadTask() {
 
     }
 
+    @Override
     public void run() {
         System.out.println(Thread.currentThread().getName());
         System.out.println(1);

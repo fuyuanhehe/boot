@@ -1,52 +1,44 @@
-/*
 package com.boot.boot.shiro;
 
-import com.boot.boot.shiro.RedisUtil;
+import com.boot.boot.redis.RedisServiceImpl;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
-import org.springframework.util.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.SerializationUtils;
 
-import javax.annotation.Resource;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
-public class CustomCache<K,V> implements Cache<K,V> {
+public class CustomCache<K, V> implements Cache<K, V> {
 
-    private final String CACHE_PREX="shiro_cache";
 
-    private byte[] getKey(K k){
-        return SerializationUtils.serialize(k+CACHE_PREX);
-    }
-
-    @Resource
-    private RedisUtil jedis;
+    @Autowired
+    RedisServiceImpl<byte[]> redisService;
 
     @Override
     public V get(K k) throws CacheException {
-        byte [] key =getKey(k);
-        byte [] value =jedis.getValue(key);
-        V v= (V) SerializationUtils.deserialize(value);
+
+        byte[] value = redisService.get(k.toString());
+
+        V v = (V) SerializationUtils.deserialize(value);
         return v;
     }
 
     @Override
     public V put(K k, V v) throws CacheException {
-        byte [] key =getKey(k);
-        byte [] value=SerializationUtils.serialize(v);
-        jedis.set(key,value);
-        jedis.expire(key, 1800);
+
+        byte[] value = SerializationUtils.serialize(v);
+        redisService.set(k.toString(), value, 3600L);
         return v;
     }
-    
+
     @Override
     public V remove(K k) throws CacheException {
-        byte [] key =getKey(k);
-        byte [] value=jedis.getValue(key);
-        jedis.del(key);
-        V v = (V) SerializationUtils.deserialize(value);
-        return v;
+
+        V value = this.get(k);
+        redisService.remove(k.toString());
+
+        return value;
     }
 
     @Override
@@ -61,27 +53,12 @@ public class CustomCache<K,V> implements Cache<K,V> {
 
     @Override
     public Set<K> keys() {
-        Set<byte[]> values =jedis.keys(CACHE_PREX);
-        Set<K> keySet = new HashSet<>();
-        for (byte[] value : values) {
-           K k = (K) SerializationUtils.deserialize(value);
-           keySet.add(k);
-        }
-        return keySet;
+        return null;
     }
 
     @Override
     public Collection<V> values() {
-        Set<byte[]> values =jedis.values(CACHE_PREX);
-        if (CollectionUtils.isEmpty(values)) {
-            return null;
-        }
-        Set<V> vSet = new HashSet<>();
-        for (byte[] v : values) {
-            V v1= (V) SerializationUtils.deserialize(v);
-            vSet.add(v1);
-        }
-        return vSet;
+
+        return null;
     }
 }
-*/

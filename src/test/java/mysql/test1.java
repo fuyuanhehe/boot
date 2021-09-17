@@ -1,5 +1,6 @@
 package mysql;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,24 +15,11 @@ public class test1 {
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping(value = "test")
-    public void test() throws SQLException {
-
-        Connection con = dataSource.getConnection();
-        Statement statement = con.createStatement();
-        ResultSet rs = statement.executeQuery("select * from system_user ");
-        while (rs.next()) {
-            String name = rs.getString("username");
-            System.out.println(name);
-        }
-
-    }
-
     public static void main(String[] args) {
-        com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds;
+        MysqlDataSource ds;
         Connection conn2;
         // create connection with a datasource object
-        ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+        ds = new MysqlDataSource();
         ds.setServerName("localhost");
         ds.setDatabaseName("test");
         ds.setPort(3306);
@@ -54,5 +42,18 @@ public class test1 {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value = "test")
+    public void test() throws SQLException {
+
+        Connection con = dataSource.getConnection();
+        Statement statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("select * from system_user ");
+        while (rs.next()) {
+            String name = rs.getString("username");
+            System.out.println(name);
+        }
+
     }
 }
