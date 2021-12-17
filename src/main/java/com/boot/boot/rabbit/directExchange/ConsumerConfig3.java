@@ -12,18 +12,17 @@ public class ConsumerConfig3 {
     /**
      * 交换机名称
      */
-    private String exchangeName = "exchangeName";
+    private static final String exchangeName = "exchangeName";
 
     /**
      * 主题名称
      */
-    private String bindingKey = "error";
+    private static final String bindingKey = "error";
 
     /**
      * 消费者队列名称（指定队列）
      */
-    private String queueName = "queueName";
-
+    private static final String queueName = "queueName";
 
 
     //durable：true、false true：在服务器重启时，能够存活
@@ -56,8 +55,6 @@ public class ConsumerConfig3 {
     }
 
 
-
-
     /**
      * 声明直连交换机
      *
@@ -83,6 +80,7 @@ public class ConsumerConfig3 {
     @Bean
     public Binding binding(Queue consumerQueue99, DirectExchange directExchange) {
         return BindingBuilder.bind(consumerQueue99).to(directExchange).with(bindingKey);
-
     }
+
+
 }

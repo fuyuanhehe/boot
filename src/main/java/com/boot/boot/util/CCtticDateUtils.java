@@ -31,12 +31,7 @@ public class CCtticDateUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         return format.format(new Date());
     }
-    /**
-     * 获取时间戳
-     */
-    public static Long getTimeStamp(){
-        return System.currentTimeMillis();
-    }
+
 
     /**
      * 时间戳转data
@@ -82,25 +77,12 @@ public class CCtticDateUtils {
         return "";
     }
 
-    /**
-     * 取得当前时间戳（精确到秒）
-     *
-     * @return
-     */
-    public static String timeStamp() {
-        long time = System.currentTimeMillis();
-        String t = String.valueOf(time / 1000);
-        return t;
-    }
 
     public static void main(String[] args) {
-        //String timeStamp = timeStamp();
-        //  System.out.println("timeStamp="+timeStamp); //运行输出:timeStamp=1470278082
         // System.out.println(System.currentTimeMillis());//运行输出:1470278082980
         //该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数
 
-        // String timeStamp =(System.currentTimeMillis() / 1000 ) +"";
-        String timeStamp = System.currentTimeMillis() + "";
+        String timeStamp = System.currentTimeMillis() / 1000 + "";
 
         System.out.println(timeStamp);
         String date = timeStamp2Date(timeStamp, "yyyy-MM-dd HH:mm:ss");

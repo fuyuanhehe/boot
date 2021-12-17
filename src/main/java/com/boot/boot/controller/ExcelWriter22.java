@@ -68,28 +68,6 @@ public class ExcelWriter22 {
     }
 
 
-
-
-   /* @RequestMapping("/exportExcel22")
-    public void export2(HttpServletResponse response) throws IOException {
-        List<DemoData> list = getData();
-        ServletOutputStream out = response.getOutputStream();
-        ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX, true);
-        String fileName = "测试exportExcel";
-        Sheet sheet = new Sheet(1, 0, DemoData.class);
-        //设置自适应宽度
-        sheet.setAutoWidth(Boolean.TRUE);
-        // 第一个 sheet 名称
-        sheet.setSheetName("第一个sheet");
-        writer.write(list, sheet);
-        //通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文
-        response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1") + ".xlsx");
-        response.setContentType("multipart/form-data");
-        response.setCharacterEncoding("utf-8");
-        out.flush();
-        writer.finish();
-    }*/
-
     @PostMapping("/import")
     public void importCustomerDaily(@RequestParam MultipartFile file) throws IOException {
         InputStream inputStream = file.getInputStream();

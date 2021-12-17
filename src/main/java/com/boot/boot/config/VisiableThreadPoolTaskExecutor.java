@@ -13,17 +13,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class VisiableThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(VisiableThreadPoolTaskExecutor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(VisiableThreadPoolTaskExecutor.class);
 
     private void showThreadPoolInfo(String prefix) {
         ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-        if (null == threadPoolExecutor) {
-            return;
-        }
 
 
-        logger.info("{}, {},taskCount [{}], completedTaskCount [{}], activeCount [{}], queueSize [{}] ",
+
+        LOGGER.info("{}, {},taskCount [{}], completedTaskCount [{}], activeCount [{}], queueSize [{}] ",
                 this.getThreadNamePrefix(),
                 prefix,
                 threadPoolExecutor.getTaskCount(),

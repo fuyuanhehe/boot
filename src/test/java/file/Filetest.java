@@ -9,18 +9,7 @@ public class Filetest {
 
     public static void main(String[] args) throws Exception {
 
-        // test(null);
-        File file1 = new File("src/main/webapp/upload/AA.xlsx");
-        //  file1.createNewFile();
-
-        OutputStream out = new FileOutputStream("src/main/webapp/upload/" + "AA.xlsx");
-
-        String a = "你还";
-
-        out.write(a.getBytes());
-        out.close();
-        //  String s = System.getProperty("line.separator");
-
+        test(null);
 
     }
 
@@ -39,9 +28,14 @@ public class Filetest {
         byte[] bytes = new byte[1024];
         int i;
         while ((i = in.read(bytes)) != -1) {
+            System.out.println("======");
+            System.out.println(i);
             System.out.println(new String(bytes));
-            out.write(bytes, 0, i);
+            out.write(bytes);
         }
+
+
+     //   in.read(bytes);
 
         out.close();
         in.close();

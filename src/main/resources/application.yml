@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8088
 
 spring:
   profiles:
@@ -44,7 +44,7 @@ spring:
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -53,7 +53,26 @@ spring:
       max-active: 15
       min-idle: 1
       query-timeout: 5000
+     # 扩展插件：stat监控统计，wall防SQL注入等
+      filters: stat,wall
+      web-stat-filter:
+       # 是否启用统计监控，可进行添加配置进行详细控制
+        enabled: true
+      stat-view-servlet:
+       # 开启监控页面
+        enabled: true
+       # 页面登录账号密码
+        login-username: test
+        login-password: test
+        # 运行访问的白名单，不设置任何可访问，必须配置。如不配置只可单机访问
+#        allow:
+       # 黑名单
+        deny:
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      use-global-data-source-stat: true
 
+
+# http://localhost:8080/druid/login.html sql监控
 
   redis:
     host: 127.0.0.1
@@ -69,18 +88,17 @@ spring:
 
 
 mybatis:
-  mapper-locations: classpath*:mapper/*.xml
+  mapper-locations: classpath*:mapper/mapper1/*.xml
   configuration: # 配置懒加载机制
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
     log-prefix: dao.
+    map-underscore-to-camel-case: true
+
+
 
 logging:
   config: classpath:logback.xml
-  level:
-    com:
-      boot:
-        boot: DEBUG
 
 fdfs:
   so-timeout: 30000

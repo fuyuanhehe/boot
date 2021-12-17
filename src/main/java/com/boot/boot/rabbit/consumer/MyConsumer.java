@@ -2,6 +2,8 @@ package com.boot.boot.rabbit.consumer;
 
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 
@@ -15,15 +17,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyConsumer {
 
-   // @RabbitHandler
-   // @RabbitListener(queues = "queueName")
+    @RabbitHandler
+    @RabbitListener(queues = "queueName")
     public void consumeMessage(String msg, Channel channel, Message message) throws Exception {
         System.out.print("--消费消息--------1111");
         System.out.print(msg);
         System.out.print(channel);
         System.out.print(message);
 
-        Thread.sleep(5000);
 
         // prefetchSize 单条消息大小限制，0代表不限制
         //prefetchCount：一次性消费的消息数量。会告诉 RabbitMQ

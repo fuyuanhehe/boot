@@ -23,6 +23,8 @@
 
 
 	<properties>
+		<org.springframework.cloud.version>Greenwich.SR5</org.springframework.cloud.version>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -134,7 +136,7 @@
 
 
 		<!-- spring boot JDBC -->
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 			<exclusions>
@@ -144,7 +146,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+-->
 
 		<!-- mybatis -->
 		<dependency>
@@ -201,23 +203,7 @@
 		</dependency>-->
 
 
-		<!--shiro -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-			<version>1.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-spring</artifactId>
-			<version>1.4.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-			<version>1.4.0</version>
-		</dependency>
+		
 
 
 		<dependency>
@@ -225,25 +211,6 @@
 			<artifactId>httpclient</artifactId>
 		</dependency>
 
-
-		<dependency><!--bean 转换工具-->
-			<groupId>org.mapstruct</groupId>
-			<!-- jdk8以下就使用mapstruct -->
-			<artifactId>mapstruct-jdk8</artifactId>
-			<version>1.2.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
-			<version>1.2.0.Final</version>
-		</dependency>
-
-		<!--fen ye-->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.2.5</version>
-		</dependency>
 
 
 		<dependency>
@@ -260,6 +227,12 @@
 		</dependency>
 
 
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+			<version>1.4.4.RELEASE</version>
+		</dependency>
 
 
 	</dependencies>
@@ -293,7 +266,17 @@
 
 
 
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${org.springframework.cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 
 

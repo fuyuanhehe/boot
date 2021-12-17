@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -32,6 +33,12 @@ public class User implements Serializable, Cloneable {
     private String password;
     @ExcelProperty(index = 3, value = "salt还好")
     private String salt;
+
+    private Date createDate;
+    private LocalDateTime updateDate;
+
+
+
 
 
     // 出参     date  转 字符串

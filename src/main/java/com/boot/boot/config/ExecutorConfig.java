@@ -32,7 +32,6 @@ public class ExecutorConfig {
      //   ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         ThreadPoolTaskExecutor executor = new VisiableThreadPoolTaskExecutor();
 
-
         //配置核心线程数
         executor.setCorePoolSize(corePoolSize);
         //配置最大线程数
@@ -56,6 +55,10 @@ public class ExecutorConfig {
         如果创建的线程数量大于BlockQueue的最大容量，那么创建新线程来执行该任务。
         如果创建线程导致当前运行的线程数超过maximumPoolSize，就根据饱和策略来拒绝该任务。
         */
+
+      /*  executor.getMaxPoolSize();
+        executor.getActiveCount();*/
+
 
         return executor;
     }

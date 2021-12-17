@@ -1,6 +1,7 @@
-package com.boot.boot.service;
+package com.boot.boot.service.impl;
 
 import com.boot.boot.model.User;
+import com.boot.boot.service.testService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,4 +18,6 @@ public class testService1 implements testService {
         u.setId(123);
         return u;
     }
+
+
 }

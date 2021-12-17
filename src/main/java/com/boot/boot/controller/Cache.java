@@ -1,12 +1,15 @@
 package com.boot.boot.controller;
 
-import com.boot.boot.mapper.UserMapper;
+import com.boot.boot.mapper.mapper1.UserMapper;
+import com.boot.boot.mapper.mapper2.UserMapper2;
 import com.boot.boot.redis.RedisServiceImpl;
 import com.boot.boot.service.testService;
+import com.boot.boot.service.testServiceFeig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +17,6 @@ import javax.annotation.Resource;
 import java.util.concurrent.Executor;
 
 @RestController
-@RequestMapping
 @Slf4j
 public class Cache {
 
@@ -30,12 +32,32 @@ public class Cache {
     UserMapper userMapper;
     @Autowired
     RedisServiceImpl<Object> redisService;
-
-
+    @Autowired
+    UserMapper2 userMapper2;
     @Autowired
     @Qualifier("asyncServiceExecutor")
     private Executor executor;
 
+    @Autowired
+    private testServiceFeig testServiceFeig;
+
+
+    @RequestMapping("/testFeignClient")
+    public Object testFeignClient(@RequestBody String str) {
+        log.info(str);
+        return testServiceFeig.hello(str);
+    }
+
+
+    @RequestMapping("/getUser")
+    public Object getUser() {
+        return userMapper.getUserByUsername(null);
+    }
+
+    @RequestMapping("/getUser2")
+    public Object getUser2() {
+        return userMapper2.getCall();
+    }
 
     @GetMapping("/async")
     public void async() {
@@ -47,7 +69,7 @@ public class Cache {
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+
                     }
 
                     log.info("11111111111111111111111111111");

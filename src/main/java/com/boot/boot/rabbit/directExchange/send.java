@@ -1,12 +1,14 @@
 package com.boot.boot.rabbit.directExchange;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -20,13 +22,19 @@ public class send {
 
     @RequestMapping("send")
     public void test() {
-        //  ackPublisher.publish("发布消息");
+
+
+        CorrelationData correlationData1 = new CorrelationData(UUID.randomUUID().toString());
+
+
+        rabbitTemplate.convertAndSend("exchangeName", "error", "发布到绑定routing-key是log.error的队列", correlationData1);
+
 
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             if (ack) {
-                log.info("消息{}接收成功", correlationData.getId());
+                log.info("消息{}接收成功", correlationData);
             } else {
-                log.info("消息{}接收失败，原因{}", correlationData.getId(), cause);
+                log.info("消息{}接收失败，原因{}", correlationData, cause);
             }
         });
 
@@ -36,12 +44,6 @@ public class send {
         });
 
 
-        //   CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-
-
-        rabbitTemplate.convertAndSend(exchangeName, "error", "发布到绑定routing-key是log.error的队列");
-
-
     }
 
 
@@ -49,7 +51,7 @@ public class send {
     public String send2() {
 
         rabbitTemplate.convertAndSend(exchangeName, "error", "测试会过期的", message -> {
-            message.getMessageProperties().setExpiration("20000");
+            message.getMessageProperties().setExpiration("5000");
             return message;
         });
 

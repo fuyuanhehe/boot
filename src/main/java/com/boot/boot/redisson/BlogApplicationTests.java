@@ -20,28 +20,51 @@ public class BlogApplicationTests {
 
     @RequestMapping("RedissionTest")
     public void RedissionTest() {
-        RBucket<String> key = redissonClient.getBucket("newday");
+        RBucket<String> key = redissonClient.getBucket("fukey");
         key.set("新的数据");
         System.out.println("获取到新存入的数据：" + key.get());
     }
 
-
-    // 加锁
+    //锁住10S  尝试2s
     @RequestMapping("lock")
-    public Boolean lock(String lockName) {
+    public boolean lock(String lockName) {
         RLock lock = null;
         try {
             lock = redissonClient.getLock(lockName);
-
-            boolean res = lock.tryLock(1000 * 5, 1000 * 60, TimeUnit.MILLISECONDS);
-
-            return res;
-
+            return lock.tryLock(2000, 10000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
-            log.error("DistributedRedisLock lock [{}] Exception:", lockName, e);
-            if (lock != null) {
-                lock.unlock();
-            }
+            log.error(" lock [{}] Exception:{}", lockName, e);
+            return false;
+        }
+    }
+
+    // 锁住30s
+    @RequestMapping("lock2")
+    public boolean lock2(String lockName) throws Exception {
+        RLock lock = null;
+        try {
+            lock = redissonClient.getLock(lockName);
+            lock.lock(30000, TimeUnit.MILLISECONDS);
+            return true;
+        } catch (Exception e) {
+            log.error(" lock [{}] Exception{}:", lockName, e);
+            return false;
+        } finally {
+            log.info("lock2结束");
+        }
+
+    }
+
+
+    //一直锁住 第二个线程尝试5s
+    @RequestMapping("lock3")
+    public boolean lock3(String lockName) {
+        RLock lock = null;
+        try {
+            lock = redissonClient.getLock(lockName);
+            return lock.tryLock(5000, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            log.error(" lock [{}] Exception:{}", lockName, e);
             return false;
         }
     }

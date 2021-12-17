@@ -3,6 +3,7 @@ package lambda;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  *
@@ -13,6 +14,8 @@ public class Person  implements Serializable {
 
     private String firstName, lastName, job, gender;
     private Integer salary, age;
+    private Map map;
+
     private static final long serialVersionUID = 1L;
 
     private int id;

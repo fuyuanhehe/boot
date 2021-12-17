@@ -1,70 +1,35 @@
 package com.boot.boot.util;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
-public class ResponseMsg<T> implements Serializable{
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class ResponseMsg<T> implements Serializable {
 
-	private static final long serialVersionUID = 7302468350401978723L;
-	
-	public static final Integer STATUS_SUCCES = 0;
-	
-	public static final Integer STATUS_FAIL = -1;
-	
-	private Integer status;
-	
-	private String  message;
-	
-	private T data;
-	
-	private Integer total = 0;
+    public static final Integer STATUS_SUCCES = 200;
+    public static final Integer STATUS_FAIL = 500;
+    private Integer code;
 
-	public Integer getStatus() {
-		return status;
-	}
+    private String msg;
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    private T data;
 
-	public String getMessage() {
-		return message;
-	}
+    private Integer total = 0;
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public ResponseMsg<T> ok(T T) {
+        return new ResponseMsg<T>(STATUS_SUCCES, "成功", T, total);
+    }
 
-	public T getData() {
-		return data;
-	}
 
-	public void setData(T data) {
-		this.data = data;
-	}
+    public ResponseMsg<T> err() {
+        return new ResponseMsg<T>(STATUS_FAIL, "失败",null,total);
+    }
 
-	public void success(String msg){
-		this.message = msg;
-		this.status = STATUS_SUCCES;
-	}
-	
-	public void fail(String msg){
-		this.message = msg;
-		this.status = STATUS_FAIL;
-	}
-	
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-
-	@Override
-	public String toString() {
-		return "ResponseMsg [status=" + status + ", message=" + message + ", data=" + data + ", total=" + total + "]";
-	}
-	public ResponseMsg() {
-	}
 }

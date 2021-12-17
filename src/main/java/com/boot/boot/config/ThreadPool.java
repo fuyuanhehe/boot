@@ -53,14 +53,12 @@ public class ThreadPool {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         });
         pool.execute(() -> {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         });
 
@@ -94,9 +92,7 @@ public class ThreadPool {
 
 class ThreadTask implements Runnable {
 
-    public ThreadTask() {
 
-    }
 
     @Override
     public void run() {
