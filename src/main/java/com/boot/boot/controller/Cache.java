@@ -2,6 +2,7 @@ package com.boot.boot.controller;
 
 import com.boot.boot.mapper.mapper1.UserMapper;
 import com.boot.boot.mapper.mapper2.UserMapper2;
+import com.boot.boot.model.User;
 import com.boot.boot.redis.RedisServiceImpl;
 import com.boot.boot.service.testService;
 import com.boot.boot.service.testServiceFeig;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.concurrent.Executor;
 
 @RestController
@@ -30,10 +32,12 @@ public class Cache {
     testService testServicebb;
     @Resource
     UserMapper userMapper;
+
     @Autowired
     RedisServiceImpl<Object> redisService;
     @Autowired
     UserMapper2 userMapper2;
+
     @Autowired
     @Qualifier("asyncServiceExecutor")
     private Executor executor;

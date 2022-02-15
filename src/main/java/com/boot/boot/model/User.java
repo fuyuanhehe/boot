@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -22,11 +23,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-public class User implements Serializable, Cloneable {
+//@TableName("t_user")
+public class User implements Serializable ,AutoCloseable{
 
     @ExcelProperty(index = 0, value = "id")
     public int id;
-    private Head head;
     @ExcelProperty(index = 1, value = "username")
     private String username;
     @ExcelProperty(index = 2, value = "password")
@@ -34,11 +35,9 @@ public class User implements Serializable, Cloneable {
     @ExcelProperty(index = 3, value = "salt还好")
     private String salt;
 
+    @NotNull(message = "createDate is not null")
     private Date createDate;
     private LocalDateTime updateDate;
-
-
-
 
 
     // 出参     date  转 字符串
@@ -74,24 +73,9 @@ public class User implements Serializable, Cloneable {
         }
     }
 
+
     @Override
-    protected User clone() throws CloneNotSupportedException {
-        User x = (User) super.clone();
-        x.head = (Head) head.clone();
-
-        return x;
+    public void close() throws Exception {
+        System.out.println("------------------close");
     }
-
-    @Data
-    private static class Head implements Cloneable {
-
-        private Head() {
-        }
-
-        @Override
-        protected Object clone() throws CloneNotSupportedException {
-            return super.clone();
-        }
-    }
-
 }

@@ -2,6 +2,9 @@
 fuyuan199852        java -version
 
 
+jps
+jmap -dump:format=b,file=/filepath/heap.bin pid
+
 
 linx ук╨е
   fuyuan

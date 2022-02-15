@@ -4,6 +4,11 @@
 
 
 
+   <insert id="insertGood">
+     insert into goods id,user_id values (#{id},#{uid})
+   </insert>
+
+
   <!--根据用户名获取用户信息-->
   <select id="getUserByUsername"  resultType="com.boot.boot.model.User" >
     select
