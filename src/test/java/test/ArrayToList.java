@@ -15,7 +15,7 @@ public class ArrayToList {
         String[] str = new String[] {"hello","world"};
 
         //方式二：
-        List<String> list2 = new ArrayList<>(Arrays.asList(str));
+        List<String> list2 = Arrays.asList(str);
         System.out.println(list2);
 
         //方式三：
