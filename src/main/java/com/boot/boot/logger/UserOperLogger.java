@@ -1,5 +1,6 @@
 package com.boot.boot.logger;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -9,6 +10,7 @@ public class UserOperLogger implements Serializable {
     private static final long serialVersionUID = -863043122186541444L;
 
     private String id; // 标识符
+    @NotBlank(message = "操作内容不能为空")
     private String content; // 操作内容
     private Integer operType; // 0:增加;1:修改;2:删除,3查询
     private String operBy; // 操作人

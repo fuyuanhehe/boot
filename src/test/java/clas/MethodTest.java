@@ -1,10 +1,12 @@
 package clas;
 
-import com.boot.boot.model.User;
+import com.boot.boot.model.user;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Method;
+
+
 
 /**
  * @Author fuyuan
@@ -17,7 +19,7 @@ public class MethodTest {
     public static void main(String[] args) {
 
         ApplicationContext act = new ClassPathXmlApplicationContext("spring-shiro.xml");
-        User car01 = (User) act.getBean("users22");//从conf.xml中获取到Id为temp的bean，此时才开始装载。
+        user car01 = (user) act.getBean("users22");//从conf.xml中获取到Id为temp的bean，此时才开始装载。
 
         System.out.println(car01);
 

@@ -2,13 +2,9 @@ package test;
 
 
 import com.boot.boot.App;
-import com.boot.boot.service.testService;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,17 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource("classpath:application.yml")
 @Slf4j
 public class test7 {
-
-    @Autowired
-    @Qualifier("testServicebb")
-    testService testServicebb;
-
-    @Test
-    public void tes77() {
-        testServicebb.gg();
-    }
-
-
 
 
     public static void main(String[] args) {
@@ -42,7 +27,7 @@ public class test7 {
     public static void testNoRateLimiter() {
         Long start = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
-            System.out.println("call execute.." + i); // 未限流总耗时:3
+     //       System.out.println("call execute.." + i); // 未限流总耗时:3
         }
         Long end = System.currentTimeMillis();
         System.out.println("未限流总耗时:" + (end - start)); // 进行限流后耗时:9912
@@ -51,7 +36,7 @@ public class test7 {
     public static void testWithRateLimiter() {
         Long start = System.currentTimeMillis();
         // 每秒不超过10个任务被提交
-        RateLimiter limiter = RateLimiter.create(10.0);
+        RateLimiter limiter = RateLimiter.create(20);
         for (int i = 0; i < 100; i++) {
             // 请求RateLimiter, 超过permits会被阻塞，然后等待获取令牌
             limiter.acquire();
@@ -60,9 +45,6 @@ public class test7 {
         Long end = System.currentTimeMillis();
         System.out.println("进行限流后耗时---:" + (end - start));
     }
-
-
-
 
 
 }

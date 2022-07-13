@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 public class ResponseMsg<T> implements Serializable {
 
-    public static final Integer STATUS_SUCCES = 200;
+    public static final Integer STATUS_SUCCESS = 200;
     public static final Integer STATUS_FAIL = 500;
     private Integer code;
 
@@ -24,7 +24,7 @@ public class ResponseMsg<T> implements Serializable {
     private Integer total = 0;
 
     public ResponseMsg<T> ok(T T) {
-        return new ResponseMsg<T>(STATUS_SUCCES, "成功", T, total);
+        return new ResponseMsg<T>(STATUS_SUCCESS, "成功", T, total);
     }
 
 

@@ -1,6 +1,6 @@
 package lambda;
 
-import com.boot.boot.model.User;
+import com.boot.boot.model.user;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,21 +9,21 @@ public class AcceptMethod {
 
 
     public static void main(String[] args) {
-        List<User> userList = new LinkedList<>();
-        User u = new User();
+        List<user> userList = new LinkedList<>();
+        user u = new user();
         u.setUsername("测试啊");
         u.setId(35);
 
 
-        User u2 = new User();
+        user u2 = new user();
         u2.setId(15);
         u2.setUsername("测试啊2");
 
-        User u21 = new User();
+        user u21 = new user();
         u21.setId(25);
         u21.setUsername("真的啊啊");
 
-        User u3 = new User();
+        user u3 = new user();
         u3.setId(22);
         u3.setUsername("阿阿不");
 
@@ -32,8 +32,6 @@ public class AcceptMethod {
         userList.add(u2);
         userList.add(u21);
         userList.add(u3);
-
-
 
 
         //   IntSummaryStatistics intSummaryStatistics = userList.stream().mapToInt(User::getId).summaryStatistics();

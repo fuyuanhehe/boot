@@ -21,10 +21,14 @@ public enum  Color {
 
      //   System.out.println(getThe(2));
 
-        for (Color  s : Color.values()) {
+       /* for (Color  s : Color.values()) {
             System.out.println(s.getCode());
             System.out.println(s.getName());
-        }
+        }*/
+
+
+        System.out.println(getThe(6));
+
 
     }
 
@@ -33,9 +37,10 @@ public enum  Color {
 
         switch (a){
             case 1:
+            case 2:
                 o = "红色";
                break;
-            case 2:
+            case 4:
                 o = "黑色";
                 break;
             case 3:

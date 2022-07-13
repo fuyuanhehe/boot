@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/user")
 @Api(value = "用户类")
-public class UserController {
+public class Controller2 {
 
 
     //	http://localhost:9090/swagger-ui.html#/

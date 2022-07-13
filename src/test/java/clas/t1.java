@@ -1,7 +1,7 @@
 package clas;
 
 
-import com.boot.boot.model.User;
+import com.boot.boot.model.user;
 
 public class t1 {
 
@@ -10,7 +10,7 @@ public class t1 {
      /* System.out.println("\\");  //  \
       System.out.println("\'");  //  '
       System.out.println("\"");  //  "*/
-        Class<User> u = User.class;
+        Class<user> u = user.class;
 
         //  System.out.println(u.getSimpleName()); //User
         // System.out.println(u.getName()); //com.boot.boot.model.User

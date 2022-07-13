@@ -7,18 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @Author fuyuan
  * @Description
  **/
 @SpringBootApplication
-@MapperScan(value = {"com.boot.boot.mapper/mapper1",
-        "com.boot.boot.mapper/mapper2","com.boot.boot.sharding"})
+@MapperScan(value = {"com.boot.boot.mapper","com.boot.boot.sharding"})
 //@ImportResource(locations = {"classpath:quartz-triggers.xml"})
 @EnableCaching   //开启缓存
-@EnableTransactionManagement
 
 @EnableScheduling  // boot 定时任务
 @EnableRabbit // 启用@RabbitListener

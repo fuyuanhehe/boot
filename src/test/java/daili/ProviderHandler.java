@@ -9,6 +9,7 @@ public class ProviderHandler implements InvocationHandler {
 
     public Object bind(Object target) {
         this.target = target;
+
         //这里生成了代理对象
         return Proxy.newProxyInstance(target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(), this);
@@ -19,8 +20,8 @@ public class ProviderHandler implements InvocationHandler {
         //限流
      //   flowLimit(args);
 
-        System.out.println(proxy.getClass().getSimpleName());
-        System.out.println(method.getName());
+       // System.out.println(proxy.getClass().getSimpleName());
+        System.out.println(method.getName()); //getData
         System.out.println(args[0]);  // aaa
         Object obj = method.invoke(target, args);
         //打印日志

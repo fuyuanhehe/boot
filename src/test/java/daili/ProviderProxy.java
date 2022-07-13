@@ -20,10 +20,10 @@ public class ProviderProxy implements IProvider{
         return object;
     }
 
-    @Override
-    public int a() {
-        return 111;
-    }
+
+
+
+
 
     //main
     public static void main(String[] args) throws Exception {

@@ -1,23 +1,41 @@
 package commonUtils;
 
-import com.boot.boot.model.User;
+import com.boot.boot.model.user;
 import com.google.common.base.Joiner;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 public class commonUtils2 {
 
 
     public static void main(String[] args) {
 
-        Field[] fields = FieldUtils.getAllFields(User.class);
+        Field[] fields = FieldUtils.getAllFields(user.class);
 
        /* for (Field field : fields) { // 获取所有得字段
          //   System.out.println(field.getName());
@@ -25,14 +43,14 @@ public class commonUtils2 {
         }*/
 
         //获取类的全名称
-        String a = ClassUtils.getName(User.class);
-       // System.out.println(a);
-            // New 各种对象
-      //  List<String> list = Lists.newArrayList();
-      //  Set<String> set = Sets.newHashSet();
-      //  Map<String, Object> map = Maps.newConcurrentMap();
+        String a = ClassUtils.getName(user.class);
+        // System.out.println(a);
+        // New 各种对象
+        //  List<String> list = Lists.newArrayList();
+        //  Set<String> set = Sets.newHashSet();
+        //  Map<String, Object> map = Maps.newConcurrentMap();
 
-          // 不可变集合
+        // 不可变集合
         ImmutableList<String> immutableList = ImmutableList.of("1", "2", "3");
 
 
@@ -52,7 +70,7 @@ public class commonUtils2 {
         System.out.println(capitalize); // 输出Yideng
 
 
-      //  DateUtils.parseDate()
+        //  DateUtils.parseDate()
 
 
         //列表转符号分隔的字符串
@@ -62,13 +80,13 @@ public class commonUtils2 {
         list.add("3");
         String result = Joiner.on("-").join(list);
 
-      //  System.out.println(result);  //  1-2-3
+        //  System.out.println(result);  //  1-2-3
 
 
         // 求交集、并集、差集等
-       // 例如下面代码求 set1 和 set2 的交集
-        Set<Integer> set1 = Sets.newHashSet(1,2,3,4,5,6);
-        Set<Integer> set2 = Sets.newHashSet(1,2,3,4,7);
+        // 例如下面代码求 set1 和 set2 的交集
+        Set<Integer> set1 = Sets.newHashSet(1, 2, 3, 4, 5, 6);
+        Set<Integer> set2 = Sets.newHashSet(1, 2, 3, 4, 7);
 
 
         Sets.SetView<Integer> result1 = Sets.union(set1, set2);//合集，并集 1, 2, 3, 4, 5, 6, 7
@@ -111,15 +129,13 @@ public class commonUtils2 {
         System.out.println(column); // 输出 {18:"yideng"}
 
 
-
         BiMap<String, String> biMap = HashBiMap.create();
 // 如果value重复，put方法会抛异常，除非用forcePut方法
-        biMap.put("key","value");
+        biMap.put("key", "value");
         System.out.println(biMap); // 输出 {"key":"value"}
 // 既然value不能重复，何不实现个翻转key/value的方法，已经有了
         BiMap<String, String> inverse = biMap.inverse();
         System.out.println(inverse); // 输出 {"value":"key"}
-
 
 
         Multiset<String> multiset = HashMultiset.create();
@@ -141,9 +157,25 @@ public class commonUtils2 {
     }
 
 
+    /**
+     * 两集合取差异
+     *
+     * @param list       req
+     * @param stringList req
+     * @return
+     */
+    private boolean takeDifference(List<String> list, List<String> stringList) {
+        List<String> arrayList = new ArrayList<>();
+        arrayList.addAll(list);
+        arrayList.addAll(stringList);
+        List<String> reduce = arrayList.stream().filter(item -> !list.contains(item)).collect(toList());
+        List<String> reduce2 = arrayList.stream().filter(item -> !stringList.contains(item)).collect(toList());
 
-
-
+        if (CollectionUtils.isEmpty(reduce) && CollectionUtils.isEmpty(reduce2)) {
+            return false;
+        }
+        return true;
+    }
 
 
 }
