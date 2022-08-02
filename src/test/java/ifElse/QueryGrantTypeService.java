@@ -11,7 +11,7 @@ import java.util.function.Function;
 @Service
 public class QueryGrantTypeService {
 
-    //  CompletableFuture.runAsync
+    //  CompletableFuture.runAsync  te
     @Autowired
     private GrantTypeSerive grantTypeSerive;
 
