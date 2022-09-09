@@ -13,7 +13,7 @@ public class QueryGrantTypeService {
 
     //  CompletableFuture.runAsync  te
     @Autowired
-    private GrantTypeSerive grantTypeSerive;
+    private GrantTypeService grantTypeSerive;
 
     private Map<Integer, Function<Integer, String>> getGrantTypeMap = new HashMap<>();
 

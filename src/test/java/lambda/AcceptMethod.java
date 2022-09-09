@@ -8,7 +8,7 @@ import java.util.List;
 public class AcceptMethod {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<user> userList = new LinkedList<>();
         user u = new user();
         u.setUsername("测试啊");
@@ -27,11 +27,14 @@ public class AcceptMethod {
         u3.setId(22);
         u3.setUsername("阿阿不");
 
-
         userList.add(u);
         userList.add(u2);
         userList.add(u21);
         userList.add(u3);
+
+
+        userList.stream().filter(a -> "xx".equals(a.getUsername())).findFirst()
+                .orElseThrow(() -> new Exception(""));
 
 
         //   IntSummaryStatistics intSummaryStatistics = userList.stream().mapToInt(User::getId).summaryStatistics();

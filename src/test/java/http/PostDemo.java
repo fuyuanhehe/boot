@@ -1,7 +1,7 @@
 package http;
 
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,14 +21,14 @@ public class PostDemo {
         try {
             // 1. 获取访问地址URL
          //   String address = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm";
-            String address = "http://127.0.0.1:8080/testUser";
+            String address = "http://123.182.227.105:12020/bhtong/hanhua/insure/auditNotice";
             URL url = new URL(address);
             // 2. 创建HttpURLConnection对象
             HttpURLConnection connection = (HttpURLConnection) url
                     .openConnection();
             /* 3. 设置请求参数等 */
             // 请求方式
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             // 超时时间
             connection.setConnectTimeout(3000);
             // 设置是否输出
@@ -44,15 +44,15 @@ public class PostDemo {
                     "application/json");
             // 连接
             connection.connect();
+
             /* 4. 处理输入输出 */
             // 写入参数到请求中
          //   String params = "tel=18782025848";
 
-            JSONObject json = new JSONObject();
-           json.put("username",555);
+          String str = "AWCU87G0FewHMV92kgdRAmHbGUp7_pSPbwYkRxP6eu7v0T28P2zCYzoSXHzlDSYDjt-8_lMjyL_Yd6EMtwgzcL0DvUgX_WKxU6iBREXYebs_GWQomz0se4C422wepCN3AFHexnHx2BWYEAZPwqKpn96qvN5GGyuTug4eSk2iSdJj3tYjya7pOlHnM-LZNl5_NA75FjU-TKY3bwzay4xGlmkMkDcTOHHVcmo0QYqmLNKjFGSyE8nBzgSQxcwEDhadym9jEDytY2WCU2Ur3elzZdyvIrtKieTzd57yxKmunYe-3SAljOWx1-4-4hAbTi76HmPWmM7BEzZ4rO5LIV0j5w";
 
             OutputStream out = connection.getOutputStream();
-            out.write(json.toString().getBytes());
+            out.write(JSON.toJSON(str).toString().getBytes());
             out.flush();
             out.close();
             // 从连接中读取响应信息

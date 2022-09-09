@@ -21,13 +21,17 @@ public class test {
 
 
     @RequestMapping("testUser")
-    // @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public Object test2() {
 
+       //   test2Service.test1(4);
+        test1(3);
+
         user user = new user();
-        user.setUsername("99299");
+        user.setUsername("1");
         userMapper.insertSelective(user);
-        test1(2);
+
+        int a = 10 / 0;
 
         return "ok";
     }
@@ -40,10 +44,6 @@ public class test {
         user.setUsername("test" + i);
         userMapper.insertSelective(user);
 
-
-        if (i == 2) {
-            int a = 10 / 0;
-        }
 
     }
 

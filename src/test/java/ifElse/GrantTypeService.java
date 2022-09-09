@@ -4,7 +4,7 @@ package ifElse;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GrantTypeSerive {
+public class GrantTypeService {
 
     public String redPaper(Integer resourceId){
         //红包的发放方式

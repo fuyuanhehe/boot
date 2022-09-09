@@ -89,3 +89,14 @@ ceil  11.4  = 12
 floor  11.4  = 11
 trunc 11.9 = 11
 
+
+
+update user set time1=now(),time2=date_add(NOW(), interval 1 MONTH) where id=1;
+
+
+date_add() 增加
+date_sub()减少
+
+month 月份
+minute 分钟
+second 秒

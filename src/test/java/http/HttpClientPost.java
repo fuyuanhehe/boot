@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * POST请求测试
@@ -36,7 +34,7 @@ public class HttpClientPost {
 
         // 2. 创建HttpPost对象
         //请求地址(我这里测试使用淘宝提供的手机号码信息查询的接口)
-        String address = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm";
+        String address = "http://121.28.5.194:12020/bhtong/hanhua/insure/auditNotice";
 
         //请求参数
         //   Map<String, String> params = new HashMap< >();
@@ -51,9 +49,8 @@ public class HttpClientPost {
         // params.add(new BasicNameValuePair("username", "test"));
         //  params.add(new BasicNameValuePair("password", "12356"));
         try {
-            Map m = new HashMap();
-            m.put("tel", "18782025848");
-
+         /*   Map m = new HashMap();
+            m.put("tel", "18782025848");*/
             //  StringEntity s = new StringEntity(m);
 
             UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params);
